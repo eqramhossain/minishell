@@ -6,11 +6,16 @@
 #    By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 21:04:07 by ehossain          #+#    #+#              #
-#    Updated: 2025/07/10 15:28:12 by ehossain         ###   ########.fr        #
+#    Updated: 2025/07/15 13:24:33 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = ./src/minishell.c \
+	  ./src/parsing/free.c \
+	  ./src/parsing/token.c \
+	  ./src/parsing/utils.c \
+	  ./src/parsing/parsing.c \
+	  ./src/parsing/parsing_utils.c
 
 NAME = minishell
 INCLUDE = ./include
@@ -24,7 +29,7 @@ MAKE = make --no-print-directory
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -lreadline
 	@echo "$(GREEN)minishell compiled$(END)"
 
 $(LIBFT) :
