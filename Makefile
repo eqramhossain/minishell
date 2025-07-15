@@ -6,7 +6,7 @@
 #    By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 21:04:07 by ehossain          #+#    #+#              #
-#    Updated: 2025/07/15 13:24:33 by ehossain         ###   ########.fr        #
+#    Updated: 2025/07/15 18:37:45 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRC = ./src/minishell.c \
 	  ./src/parsing/token.c \
 	  ./src/parsing/utils.c \
 	  ./src/parsing/parsing.c \
-	  ./src/parsing/parsing_utils.c
+	  ./src/parsing/parsing_utils.c \
+	  ./src/parsing/ft_lexing.c \
 
 NAME = minishell
 INCLUDE = ./include
