@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexing.c                                        :+:      :+:    :+:   */
+/*   ft_parsing_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 16:33:54 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/19 16:48:53 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/19 17:03:28 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/19 17:03:43 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexer	*ft_lexing(char *str, t_lexer *lexer)
+t_parser	*ft_parser_init(t_lexer *lexer)
 {
-	lexer = malloc(sizeof(t_lexer));
-	if (!lexer)
-		exit(EXIT_FAILURE);
-	lexer->input = str;
-	lexer->pos = 0;
-	lexer->token_count = 0;
-	lexer->token_capacity = 64;
-	lexer->tokens = malloc(sizeof(t_token *) * lexer->token_capacity);
-	if (!lexer->tokens)
-	{
-		free(lexer);
-		exit(EXIT_FAILURE);
-	}
-	ft_tokenisation(lexer);
-	return (lexer);
+	t_parser	*parser;
+
+	parser = malloc(sizeof(t_parser));
+	parser->tokens = lexer->tokens;
+	parser->pos = 0;
+	parser->token_count = lexer->token_count;
+	return (parser);
 }

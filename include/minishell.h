@@ -6,25 +6,17 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 14:45:41 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/15 17:26:19 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/20 14:45:19 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "define_struct.h"
-# include "ft_printf.h"
-# include "get_next_line.h"
-# include "libft.h"
-# include <fcntl.h>
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <signal.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+# include "include.h"
+
+void		ft_display_banner(void);
+char		*ft_prompt(void);
 
 /* ========================================================================== */
 /* ================================ PARSING ================================= */
@@ -40,6 +32,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		ft_print_token(t_lexer *lexer);
 char		ft_advance(t_lexer *lexer);
+void		ft_strerror(char *str);
 /* ========================================================================== */
 
 /* =============================== TOKENISATION ============================= */

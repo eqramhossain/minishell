@@ -6,7 +6,7 @@
 /*   By: roussada <roussada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:41:22 by roussada          #+#    #+#             */
-/*   Updated: 2025/07/15 13:46:06 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:01:25 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,15 @@ void	ft_tokenisation(t_lexer *lexer)
 		c = ft_peak(lexer);
 		if (c == '\0')
 			break ;
-		else if (ft_check_operator(c))
+		else if (ft_check_operator(c)) // is a pipe or redirection
 		{
 			ft_lex_operator(lexer);
 		}
-		else if (c == '\'' || c == '"')
+		else if (c == '\'' || c == '"') // is a qoute
 		{
 			ft_lex_quote(lexer);
 		}
-		else if (ft_isword(c))
+		else if (ft_isword(c)) // if char is a word
 		{
 			ft_lex_word(lexer);
 		}

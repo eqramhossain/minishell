@@ -6,7 +6,7 @@
 /*   By: roussada <roussada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:41:59 by roussada          #+#    #+#             */
-/*   Updated: 2025/07/15 13:39:09 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/19 16:50:42 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_mmcpy(void *dest, const void *src, size_t n)
 {
 	size_t			i;
 	unsigned char	*dd;
@@ -108,8 +108,8 @@ char	ft_peak(t_lexer *lexer)
 
 void	ft_skip_whitespace(t_lexer *lexer)
 {
-	while ((lexer->input[lexer->pos] == 32 || lexer->input[lexer->pos] == '\t')
-		&& lexer->input[lexer->pos] != '\0')
+	while ((lexer->input[lexer->pos] != '\0') && (lexer->input[lexer->pos] == 32
+			|| lexer->input[lexer->pos] == '\t'))
 		lexer->pos++;
 }
 

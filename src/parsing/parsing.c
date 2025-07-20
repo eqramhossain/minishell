@@ -6,7 +6,7 @@
 /*   By: roussada <roussada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:12:55 by roussada          #+#    #+#             */
-/*   Updated: 2025/07/15 13:47:45 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:35:13 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static int	ft_handle_redirection(t_parser *parser, t_ast *node)
 	if (!file_token || file_token->type != TOKEN_WORD)
 	{
 		fprintf(stderr, "Syntax error: expected file after redirection\n");
-		exit(1);
+		return (0);
+		// changed exit to return. cause it exit the program when there is a sytax error.
 	}
 	ft_add_redirection(node, redir_type, file_token->text);
 	parser->pos++;
@@ -45,7 +46,10 @@ void	ft_init_node(t_ast *node)
 {
 	node->type = "command";
 	node->argv = malloc(sizeof(char *) * 256);
-	node->left = node->right = NULL;
+	// why allocate 256 pointer to char ??
+	// what if the argv has to deal with more that 256 char *
+	node->left = NULL;
+	node->right = NULL;
 	node->redirs = NULL;
 }
 
@@ -63,19 +67,23 @@ void	ft_free_redirections(t_redir *redir)
 
 t_ast	*ft_parse_command(t_parser *parser)
 {
-	t_ast	*node;
 	size_t	argc;
+	t_ast	*node;
 	t_token	*token;
 
+	argc = 0;
 	node = malloc(sizeof(t_ast));
 	ft_init_node(node);
-	argc = 0;
 	while ((token = ft_parser_current(parser)))
 	{
 		if (token->type == TOKEN_WORD)
 			node->argv[argc++] = token->text, parser->pos++;
 		else if (token->type >= TOKEN_INPUT && token->type <= TOKEN_HEREDOC)
-			ft_handle_redirection(parser, node);
+		{
+			if (ft_handle_redirection(parser, node) == 0)
+				break ;
+			// there was a exit before so whenever there is a problem the shell exited unexpectedly
+		}
 		else
 			break ;
 	}
@@ -106,21 +114,14 @@ t_ast	*ft_parse_pipeline(t_parser *parser)
 		pipe_node->right = ft_parse_command(parser);
 		if (!pipe_node->right)
 		{
-			perror("sytax error after |\n");
-			exit(1);
+			// perror("sytax error after | pipe");
+			// perror is inutile here use ft_strerror
+			ft_strerror("Syntax error: expected argument after pipe");
+			// exit(1);
+			return (NULL);
+			// changed exit to return for unexpected exit reason
 		}
 		left = pipe_node;
 	}
 	return (left);
-}
-
-t_parser	*ft_parser_init(t_lexer *lexer)
-{
-	t_parser	*parser;
-
-	parser = malloc(sizeof(t_parser));
-	parser->tokens = lexer->tokens;
-	parser->pos = 0;
-	parser->token_count = lexer->token_count;
-	return (parser);
 }

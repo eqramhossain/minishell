@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 14:46:02 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/15 13:16:19 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/20 15:05:49 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 # define STRUCT_H
 
 # include <stddef.h>
+
+# define PROMPT "➜ ehro@minishell:~"
+
+# define RESET "\033[0m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BLUE "\033[34m"
+# define MAGENTA "\033[35m"
+# define CYAN "\033[36m"
+# define WHITE "\033[37m"
+# define BOLD "\033[1m"
 
 # define TOKEN_WORD 0
 # define TOKEN_PIPE 1    // |
@@ -26,6 +38,10 @@
 
 # define AST_COMMAND 10
 # define AST_PIPE 20
+
+/* ========================================================================== */
+/* ================================ PARSING ================================= */
+/* ========================================================================== */
 
 typedef struct s_redir
 {
@@ -64,5 +80,9 @@ typedef struct s_lexer
 	size_t			token_count;
 	size_t			token_capacity;
 }					t_lexer;
+
+/* ========================================================================== */
+/* ================================== END  ================================== */
+/* ========================================================================== */
 
 #endif

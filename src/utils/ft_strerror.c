@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexing.c                                        :+:      :+:    :+:   */
+/*   ft_strerror.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 16:33:54 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/19 16:48:53 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/19 15:31:43 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/19 15:33:27 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexer	*ft_lexing(char *str, t_lexer *lexer)
+void	ft_strerror(char *str)
 {
-	lexer = malloc(sizeof(t_lexer));
-	if (!lexer)
-		exit(EXIT_FAILURE);
-	lexer->input = str;
-	lexer->pos = 0;
-	lexer->token_count = 0;
-	lexer->token_capacity = 64;
-	lexer->tokens = malloc(sizeof(t_token *) * lexer->token_capacity);
-	if (!lexer->tokens)
+	if (!str)
+		return ;
+	else
 	{
-		free(lexer);
-		exit(EXIT_FAILURE);
+		ft_putstr_fd(str, 2);
+		ft_putchar_fd('\n', 2);
 	}
-	ft_tokenisation(lexer);
-	return (lexer);
 }

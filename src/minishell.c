@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 14:45:25 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/15 17:34:19 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/15 19:07:35 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/20 23:28:22 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 int	main(void)
 {
 	char		*rl;
+	char		*prompt;
 	t_lexer		*lexer;
 	t_parser	*parser;
 	t_ast		*ast;
 
 	lexer = NULL;
+	ft_display_banner();
 	while (1)
 	{
-		rl = readline("minishell>");
+		prompt = ft_prompt();
+		rl = readline(prompt);
 		if (!rl)
 			break ;
 		if (*rl)

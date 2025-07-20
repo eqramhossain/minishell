@@ -6,17 +6,21 @@
 #    By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 21:04:07 by ehossain          #+#    #+#              #
-#    Updated: 2025/07/15 18:37:45 by ehossain         ###   ########.fr        #
+#    Updated: 2025/07/20 16:02:46 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = ./src/minishell.c \
+	  ./src/utils/ft_display_banner.c \
+	  ./src/utils/ft_prompt.c \
 	  ./src/parsing/free.c \
 	  ./src/parsing/token.c \
 	  ./src/parsing/utils.c \
 	  ./src/parsing/parsing.c \
 	  ./src/parsing/parsing_utils.c \
 	  ./src/parsing/ft_lexing.c \
+	  ./src/utils/ft_strerror.c \
+	  ./src/parsing/ft_parsing_init.c \
 
 NAME = minishell
 INCLUDE = ./include
