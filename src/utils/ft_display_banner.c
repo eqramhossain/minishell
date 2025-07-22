@@ -6,12 +6,15 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 15:06:36 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/19 15:11:41 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/22 12:28:08 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief this function display the banner for minishell
+ */
 void	ft_display_banner(void)
 {
 	printf(MAGENTA BOLD);

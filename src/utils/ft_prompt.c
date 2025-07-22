@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:39:50 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/20 16:05:31 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/22 12:29:27 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 static char	*ft_get_current_dir(void);
 
+/**
+ * @brief this function create the prompt line and print current_dir
+ *
+ * @return
+ */
 char	*ft_prompt(void)
 {
 	size_t	len_prompt;

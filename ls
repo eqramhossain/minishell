@@ -1,0 +1,10 @@
+compile_commands.json
+include
+libft
+ls
+Makefile
+minishell
+readline.supp
+README.md
+src
+subject

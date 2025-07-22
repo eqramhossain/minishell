@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_lex_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 19:07:35 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/22 12:40:26 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/22 16:37:24 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/22 16:37:35 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+void	ft_lex_word(t_lexer *lexer)
 {
-	char		*rl;
-	char		*prompt;
-	t_lexer		*lexer;
-	t_parser	*parser;
-	t_ast		*ast;
+	char		c;
+	const char	*start;
+	size_t		len;
 
-	lexer = NULL;
-	ft_display_banner();
+	start = &lexer->input[lexer->pos];
+	len = 0;
 	while (1)
 	{
-		prompt = ft_prompt();
-		rl = readline(prompt);
-		if (!rl)
+		c = ft_peak(lexer);
+		if (c == '\0' || c == 32 || ft_check_operator(c) || c == '\''
+			|| c == '"')
 			break ;
-		if (*rl)
-			add_history(rl);
-		lexer = ft_lexing(rl, lexer);
-		parser = ft_parser_init(lexer);
-		ast = ft_parse_pipeline(parser);
-		ft_print_ast_recursive(ast, 0, "");
-		ft_free_all(ast, lexer, parser);
-		free(rl);
+		ft_advance(lexer);
+		len++;
 	}
-	return (0);
+	if (len > 0)
+		ft_add_token(lexer, TOKEN_WORD, (char *)start, len);
 }

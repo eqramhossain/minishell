@@ -6,7 +6,7 @@
 /*   By: roussada <roussada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:41:59 by roussada          #+#    #+#             */
-/*   Updated: 2025/07/19 16:50:42 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/22 16:36:27 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	ft_advance(t_lexer *lexer)
 {
+	printf("lexer->input[lexer->pos++] = %c\n", lexer->input[lexer->pos++]);
+	exit(1);
 	return (lexer->input[lexer->pos++]);
 }
 
@@ -106,6 +108,11 @@ char	ft_peak(t_lexer *lexer)
 	return (lexer->input[lexer->pos]);
 }
 
+/**
+ * @brief This function skips the whitespaces
+ *
+ * @param lexer
+ */
 void	ft_skip_whitespace(t_lexer *lexer)
 {
 	while ((lexer->input[lexer->pos] != '\0') && (lexer->input[lexer->pos] == 32
