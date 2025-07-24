@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 16:39:22 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/22 16:39:28 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:00:02 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_add_token(t_lexer *lexer, int type, char *str, size_t len)
 	(void)len;
 	if (lexer->token_count >= lexer->token_capacity)
 	{
-		lexer->token_capacity *= 2;
+		lexer->token_capacity = lexer->token_capacity * 2;
+		// what is it about ??
 		lexer->tokens = ft_realloc(lexer->tokens, (lexer->token_capacity / 2)
 				* sizeof(t_token *), lexer->token_capacity * sizeof(t_token *));
 	}

@@ -6,7 +6,7 @@
 /*   By: roussada <roussada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:41:59 by roussada          #+#    #+#             */
-/*   Updated: 2025/07/22 16:36:27 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:07:57 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 char	ft_advance(t_lexer *lexer)
 {
-	printf("lexer->input[lexer->pos++] = %c\n", lexer->input[lexer->pos++]);
-	exit(1);
 	return (lexer->input[lexer->pos++]);
 }
 
-void	print_token(t_lexer *lexer)
+void	ft_print_token(t_lexer *lexer)
 {
 	size_t	i;
 	t_token	*token;

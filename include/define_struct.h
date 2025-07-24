@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 14:46:02 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/20 15:05:49 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:32:06 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define TOKEN_TRUNK 3   // >
 # define TOKEN_APPEND 4  // >>
 # define TOKEN_HEREDOC 5 // <<
-# define TOKEN_EOF 6
+# define TOKEN_EOF 6     // EOF
 # define TOKEN_ERROR 7
 
 # define AST_COMMAND 10

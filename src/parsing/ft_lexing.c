@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:33:54 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/21 00:29:35 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:08:33 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,11 @@ t_lexer	*ft_lexing(char *str, t_lexer *lexer)
 		exit(EXIT_FAILURE);
 	}
 	ft_tokenisation(lexer);
+	printf("lexer->input = %s\n", lexer->input);
+	printf("lexer->pos = %ld\n", lexer->pos);
+	printf("lexer->token_capacity = %ld\n", lexer->token_capacity);
+	printf("lexer->token_count = %ld\n", lexer->token_count);
+	ft_print_token(lexer);
+	exit(1);
 	return (lexer);
 }

@@ -6,7 +6,7 @@
 /*   By: roussada <roussada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:41:22 by roussada          #+#    #+#             */
-/*   Updated: 2025/07/22 16:39:36 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:30:15 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 void	ft_tokenisation(t_lexer *lexer)
 {
 	char	c;
+	size_t	i;
 
-	while (1)
+	i = 0;
+	while (lexer->input[i])
 	{
 		ft_skip_whitespace(lexer);
 		c = ft_peak(lexer);
