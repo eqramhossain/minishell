@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 10:59:09 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/24 21:11:41 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/24 20:12:21 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/24 22:16:15 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strjoin_free(char *str1, char *str2)
 {
-	size_t	i;
+	char	*tmp_buffer;
 
-	i = 0;
-	while (s[i] != '\0')
+	tmp_buffer = ft_strjoin(str1, str2);
+	if (!tmp_buffer)
 	{
-		i++;
+		free(str1);
+		str1 = NULL;
+		return (NULL);
 	}
-	return (i);
+	free(str1);
+	free(str2);
+	return (tmp_buffer);
 }

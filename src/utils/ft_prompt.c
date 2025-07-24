@@ -6,52 +6,61 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:39:50 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/22 12:29:27 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/24 22:26:41 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_get_current_dir(void);
+static char	*ft_first_part(void);
+static char	*ft_second_part(void);
 
-/**
- * @brief this function create the prompt line and print current_dir
- *
- * @return
- */
 char	*ft_prompt(void)
 {
-	size_t	len_prompt;
-	size_t	len_current_dir;
-	size_t	len_color1;
-	size_t	len_color2;
-	size_t	len_reset;
-	char	*current_dir;
+	char	*first_part;
+	char	*second_part;
 	char	*prompt;
 
-	len_prompt = ft_strlen(PROMPT);
-	len_color1 = ft_strlen(GREEN);
-	len_color2 = ft_strlen(BLUE);
-	len_reset = ft_strlen(RESET);
-	current_dir = ft_get_current_dir();
-	len_current_dir = ft_strlen(current_dir);
-	prompt = ft_calloc(sizeof(char), len_prompt + len_color1 + len_color2
-			+ len_reset + len_reset + len_current_dir + 2);
-	prompt = ft_strjoin(prompt, GREEN);
-	prompt = ft_strjoin(prompt, PROMPT);
-	prompt = ft_strjoin(prompt, RESET);
-	prompt = ft_strjoin(prompt, BLUE);
-	prompt = ft_strjoin(prompt, current_dir);
-	prompt = ft_strjoin(prompt, RESET);
-	prompt = ft_strjoin(prompt, "$ ");
+	first_part = ft_first_part();
+	second_part = ft_second_part();
+	second_part = ft_strjoin(second_part, "$> ");
+	prompt = ft_strjoin(first_part, second_part);
 	return (prompt);
 }
 
-static char	*ft_get_current_dir(void)
+static char	*ft_first_part(void)
 {
 	char	*prompt;
+	char	*green;
+	char	*reset;
+	char	*all;
 
-	prompt = ft_calloc(sizeof(char), 1024);
-	prompt = getcwd(prompt, 1024);
-	return (prompt);
+	prompt = ft_strdup(PROMPT);
+	green = ft_strdup(GREEN);
+	reset = ft_strdup(RESET);
+	all = "";
+	all = ft_strjoin(all, green);
+	free(green);
+	all = ft_strjoin_free(all, prompt);
+	all = ft_strjoin_free(all, reset);
+	return (all);
+}
+
+static char	*ft_second_part(void)
+{
+	char	*current_dir;
+	char	*blue;
+	char	*reset;
+	char	*all;
+
+	current_dir = NULL;
+	current_dir = getcwd(NULL, 0);
+	blue = ft_strdup(BLUE);
+	reset = ft_strdup(RESET);
+	all = "";
+	all = ft_strjoin(all, blue);
+	free(blue);
+	all = ft_strjoin_free(all, current_dir);
+	all = ft_strjoin_free(all, reset);
+	return (all);
 }

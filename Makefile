@@ -6,7 +6,7 @@
 #    By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 21:04:07 by ehossain          #+#    #+#              #
-#    Updated: 2025/07/22 16:45:23 by ehossain         ###   ########.fr        #
+#    Updated: 2025/07/24 20:28:11 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ SRC = ./src/minishell.c \
 	  ./src/utils/ft_display_banner.c \
 	  ./src/utils/ft_prompt.c \
 	  ./src/utils/ft_strerror.c \
+	  ./src/utils/ft_strldup.c \
+	  ./src/utils/ft_strjoin_free.c \
 	  ./src/parsing/free.c \
 	  ./src/parsing/ft_add_token.c \
 	  ./src/parsing/ft_lexing.c \

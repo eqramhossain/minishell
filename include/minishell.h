@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 14:45:41 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/20 14:45:19 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/24 20:28:57 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define MINISHELL_H
 
 # include "include.h"
-
-void		ft_display_banner(void);
-char		*ft_prompt(void);
+# include "utils.h"
 
 /* ========================================================================== */
 /* ================================ PARSING ================================= */
@@ -42,6 +40,7 @@ void		ft_lex_word(t_lexer *lexer);
 void		ft_lex_quote(t_lexer *lexer);
 void		ft_lex_operator(t_lexer *lexer);
 void		ft_add_token(t_lexer *lexer, int type, char *str, size_t len);
+void		ft_add_token_text(t_lexer *lexer, int type, char *str, size_t len);
 /* ========================================================================== */
 
 /* ================================ PARSER ================================== */

@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 14:46:02 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/22 17:32:06 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/24 20:42:13 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,10 @@
 # include <stddef.h>
 
 # define PROMPT "➜ ehro@minishell:~"
-
-# define RESET "\033[0m"
-# define RED "\033[31m"
-# define GREEN "\033[32m"
-# define YELLOW "\033[33m"
-# define BLUE "\033[34m"
-# define MAGENTA "\033[35m"
-# define CYAN "\033[36m"
-# define WHITE "\033[37m"
-# define BOLD "\033[1m"
+# define RESET "\001\033[0m\002"
+# define RED "\001\033[31m\002"
+# define GREEN "\001\033[32m\002"
+# define BLUE "\001\033[34m\002"
 
 # define TOKEN_WORD 0
 # define TOKEN_PIPE 1    // |

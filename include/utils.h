@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 10:59:09 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/24 21:11:41 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/24 14:42:57 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/24 20:27:17 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
+# include "include.h"
 
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
+void	ft_display_banner(void);
+char	*ft_prompt(void);
+char	*ft_strldup(const char *s, size_t len);
+char	*ft_strjoin_free(char *str1, char *str2);
+
+#endif
