@@ -6,7 +6,7 @@
 /*   By: roussada <roussada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:41:59 by roussada          #+#    #+#             */
-/*   Updated: 2025/07/22 17:07:57 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:10:23 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,6 @@
 char	ft_advance(t_lexer *lexer)
 {
 	return (lexer->input[lexer->pos++]);
-}
-
-void	ft_print_token(t_lexer *lexer)
-{
-	size_t	i;
-	t_token	*token;
-
-	i = 0;
-	while (i < lexer->token_count)
-	{
-		token = lexer->tokens[i];
-		printf("Token Number : %zu, Token: Type %d, Text: \"%s\"\n", i + 1,
-			token->type, token->text);
-		i++;
-	}
 }
 
 int	ft_strcmp(const char *s1, const char *s2)

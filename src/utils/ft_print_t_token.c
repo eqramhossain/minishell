@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing_init.c                                  :+:      :+:    :+:   */
+/*   ft_print_t_token.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 17:03:28 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/25 15:35:02 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/25 19:10:39 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/25 19:15:11 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "utils.h"
 
-t_parser	*ft_parser_init(t_lexer *lexer)
+void	ft_print_token(t_lexer *lexer)
 {
-	t_parser	*parser;
+	size_t	i;
+	t_token	*token;
 
-	parser = malloc(sizeof(t_parser));
-	parser->tokens = lexer->tokens;
-	parser->pos = 0;
-	parser->token_count = lexer->token_count;
-	return (parser);
+	i = 0;
+	while (i < lexer->token_count)
+	{
+		token = lexer->tokens[i];
+		printf("Token Number : %zu, Token: Type %d, Text: \"%s\"\n", i + 1,
+			token->type, token->text);
+		i++;
+	}
 }

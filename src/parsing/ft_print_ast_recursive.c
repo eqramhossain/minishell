@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   ft_print_ast_recursive.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roussada <roussada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:15:56 by roussada          #+#    #+#             */
-/*   Updated: 2025/07/19 16:48:29 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/25 21:08:56 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	ft_print_ast_recursive(t_ast *ast, int indent, const char *prefix)
 	}
 }
 
-t_token	*ft_parser_current(t_parser *parser)
-{
-	if (parser->pos < parser->token_count)
-		return (parser->tokens[parser->pos]);
-	return (NULL);
-}
-
+/**
+ * @brief Chek if the current token type and type did match or not
+ *
+ * @param parser
+ * @param type
+ * @return 1 if matched els return 0
+ */
 int	ft_parser_match(t_parser *parser, int type)
 {
 	t_token	*current;

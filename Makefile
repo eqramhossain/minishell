@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+         #
+#    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 21:04:07 by ehossain          #+#    #+#              #
-#    Updated: 2025/07/24 20:28:11 by ehossain         ###   ########.fr        #
+#    Updated: 2025/07/26 13:14:41 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ SRC = ./src/minishell.c \
 	  ./src/utils/ft_strerror.c \
 	  ./src/utils/ft_strldup.c \
 	  ./src/utils/ft_strjoin_free.c \
+	  ./src/utils/ft_print_t_token.c \
+	  ./src/utils/ft_print_t_ast.c \
+	  ./src/parsing/ft_call_all_parsing.c \
 	  ./src/parsing/free.c \
 	  ./src/parsing/ft_add_token.c \
 	  ./src/parsing/ft_lexing.c \
@@ -25,8 +28,8 @@ SRC = ./src/minishell.c \
 	  ./src/parsing/ft_parsing_init.c \
 	  ./src/parsing/ft_tokenisation.c \
 	  ./src/parsing/parsing.c \
-	  ./src/parsing/parsing_utils.c \
-	  ./src/parsing/utils.c
+	  ./src/parsing/ft_print_ast_recursive.c \
+	  ./src/parsing/utils.c \
 
 NAME = minishell
 INCLUDE = ./include

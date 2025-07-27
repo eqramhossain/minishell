@@ -3,43 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:07:35 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/24 20:33:44 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/26 12:45:22 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	ft_all_parsing_init(t_all_parsing *all_parsing);
 // maybe i can start the execution part
-int	main(void)
+int	main(int ac, char **av, char **envp)
 {
-	char		*rl;
-	t_lexer		*lexer;
-	t_parser	*parser;
-	t_ast		*ast;
-	char		*prompt;
+	t_all_parsing	*all_parsing;
+	char			*rl;
 
-	lexer = NULL;
+	(void)av;
+	(void)envp;
+	if (ac > 1)
+		return (ft_strerror(RED "expected ---> [./minishell]" RESET), 1);
+	all_parsing = ft_calloc(sizeof(t_all_parsing), 1);
+	ft_all_parsing_init(all_parsing);
 	ft_display_banner();
 	while (1)
 	{
-		prompt = ft_prompt();
-		rl = readline(prompt);
-		// printf("COLUMNS env: %s\n", getenv("COLUMNS"));
+		all_parsing->prompt = ft_prompt();
+		rl = readline(all_parsing->prompt);
 		if (!rl)
-			continue ;
+		{
+			ft_putchar('\n');
+			break ;
+		}
 		if (*rl)
 			add_history(rl);
-		lexer = ft_lexing(rl, lexer);
-		ft_print_token(lexer);
-		parser = ft_parser_init(lexer);
-		ast = ft_parse_pipeline(parser);
-		ft_print_ast_recursive(ast, 0, "");
-		ft_free_all(ast, lexer, parser);
-		free(prompt);
+		all_parsing = ft_call_all_parsing(all_parsing, rl);
 		free(rl);
 	}
+	free(all_parsing->prompt);
+	free(all_parsing);
 	return (0);
+}
+
+static void	ft_all_parsing_init(t_all_parsing *all_parsing)
+{
+	all_parsing->ast = NULL;
+	all_parsing->lexer = NULL;
+	all_parsing->parser = NULL;
+	all_parsing->parser = NULL;
 }

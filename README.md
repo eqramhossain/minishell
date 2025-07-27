@@ -10,7 +10,7 @@
 
 Your shell should:
 - [x] Display a prompt when waiting for a new command.
-- [ ] Have a working history.
+- [x] Have a working history.
 - [ ] Search and launch the right executable (based on the PATH variable or using a relative or an absolute path).
 - [ ] Use at most one global variable to indicate a received signal. Consider the implications: this approach ensures that your signal handler will not access your main data structures.
 - [ ] Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon).
@@ -45,3 +45,6 @@ Your shell should:
 valgrind --tool=memcheck --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
 ```
 
+- [x] get_next_line done
+- [ ] Finish the rest of the parsing 
+- [ ] Start the execution part
