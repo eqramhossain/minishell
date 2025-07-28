@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strldup.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehossain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 12:59:37 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 13:00:08 by ehossain         ###   ########.fr       */
+/*   Created: 2024/11/14 09:23:18 by ehossain          #+#    #+#             */
+/*   Updated: 2024/11/16 12:02:14 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft.h"
 
-char	*ft_strldup(const char *s, size_t len)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	i;
-	char	*ptr;
+	size_t			i;
+	unsigned char	*ptr_s;
 
 	i = 0;
-	ptr = malloc(sizeof(char) * len + 1);
-	if (!ptr)
-		return (NULL);
-	while (s[i] != '\0' && i < len)
+	ptr_s = (unsigned char *)s;
+	while (i < n)
 	{
-		ptr[i] = s[i];
+		if (ptr_s[i] == (unsigned char)c)
+		{
+			return (ptr_s + i);
+		}
 		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	return (NULL);
 }

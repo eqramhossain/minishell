@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strldup.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehossain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 12:59:37 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 13:00:08 by ehossain         ###   ########.fr       */
+/*   Created: 2024/11/12 16:17:26 by ehossain          #+#    #+#             */
+/*   Updated: 2024/11/18 12:03:34 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft.h"
 
-char	*ft_strldup(const char *s, size_t len)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	char	*ptr;
+	size_t	src_len;
 
 	i = 0;
-	ptr = malloc(sizeof(char) * len + 1);
-	if (!ptr)
-		return (NULL);
-	while (s[i] != '\0' && i < len)
+	src_len = ft_strlen(src);
+	if (!size)
 	{
-		ptr[i] = s[i];
+		return (src_len);
+	}
+	while ((src[i] != '\0') && (i < (size - 1)))
+	{
+		dst[i] = src[i];
 		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	dst[i] = '\0';
+	return (src_len);
 }

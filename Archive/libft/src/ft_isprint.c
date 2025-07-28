@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehossain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 17:27:23 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 14:41:49 by ehossain         ###   ########.fr       */
+/*   Created: 2024/11/11 10:47:54 by ehossain          #+#    #+#             */
+/*   Updated: 2024/11/13 10:17:03 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "envp.h"
-
-typedef struct s_ms_data
+/*int	main(void)
 {
-	char	*read_line;
-	char	*prompt;
-	t_envp	*envp;
-}			t_ms_data;
+	int	i;
 
-#endif
+	i = ft_isprint('~');
+	printf("%d", i);
+	return (0);
+}*/
+int	ft_isprint(int c)
+{
+	if (c >= ' ' && c <= '~')
+	{
+		return (1);
+	}
+	return (0);
+}

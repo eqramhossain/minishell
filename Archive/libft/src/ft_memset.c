@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehossain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 17:27:23 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 14:41:49 by ehossain         ###   ########.fr       */
+/*   Created: 2024/11/11 11:17:31 by ehossain          #+#    #+#             */
+/*   Updated: 2024/11/17 11:01:31 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "envp.h"
-
-typedef struct s_ms_data
+void	*ft_memset(void *s, int c, size_t n)
 {
-	char	*read_line;
-	char	*prompt;
-	t_envp	*envp;
-}			t_ms_data;
+	size_t			i;
+	unsigned char	*ptr;
 
-#endif
+	i = 0;
+	ptr = (unsigned char *)s;
+	while (i < n)
+	{
+		ptr[i] = c;
+		i++;
+	}
+	return (s);
+}

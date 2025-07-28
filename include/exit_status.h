@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exit_status.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 17:27:23 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 14:41:49 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/27 17:28:51 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/27 17:29:28 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-# include "envp.h"
-
-typedef struct s_ms_data
-{
-	char	*read_line;
-	char	*prompt;
-	t_envp	*envp;
-}			t_ms_data;
+#ifndef EXIT_STATUS_H
+# define EXIT_STATUS_H
 
 #endif

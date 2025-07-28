@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehossain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 17:27:23 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 14:41:49 by ehossain         ###   ########.fr       */
+/*   Created: 2024/11/21 14:28:12 by ehossain          #+#    #+#             */
+/*   Updated: 2024/11/23 10:44:54 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "envp.h"
-
-typedef struct s_ms_data
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*read_line;
-	char	*prompt;
-	t_envp	*envp;
-}			t_ms_data;
+	int	i;
 
-#endif
+	i = 0;
+	while (s[i] != '\0')
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}

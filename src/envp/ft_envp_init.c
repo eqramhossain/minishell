@@ -1,25 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_envp_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 17:27:23 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 14:41:49 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/28 14:43:35 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/28 15:48:05 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-# include "envp.h"
-
-typedef struct s_ms_data
-{
-	char	*read_line;
-	char	*prompt;
-	t_envp	*envp;
-}			t_ms_data;
-
-#endif
+#include "envp.h"

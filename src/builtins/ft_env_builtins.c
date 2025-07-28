@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strldup.c                                       :+:      :+:    :+:   */
+/*   ft_env_builtins.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 12:59:37 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 13:00:08 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/28 13:02:25 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/28 13:02:38 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-
-char	*ft_strldup(const char *s, size_t len)
+void	ft_env_builtin(char *cmd, char **arg, char **envp)
 {
-	size_t	i;
-	char	*ptr;
+	int		i;
+	char	**my_envp;
 
+	(void)cmd;
+	(void)arg;
 	i = 0;
-	ptr = malloc(sizeof(char) * len + 1);
-	if (!ptr)
-		return (NULL);
-	while (s[i] != '\0' && i < len)
+	while (envp[i])
+		i++;
+	my_envp = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (envp[i])
 	{
-		ptr[i] = s[i];
+		my_envp[i] = ft_strdup(envp[i]);
 		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	my_envp[i] = NULL;
+	i = 0;
+	while (my_envp[i])
+	{
+		printf("%s\n", my_envp[i]);
+		i++;
+	}
+	i = 0;
+	while (my_envp[i])
+	{
+		free(my_envp[i]);
+		i++;
+	}
+	free(my_envp);
 }

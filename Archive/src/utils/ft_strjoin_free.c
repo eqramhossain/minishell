@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 17:27:23 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 14:41:49 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/24 20:12:21 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/24 22:16:15 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "utils.h"
 
-# include "envp.h"
-
-typedef struct s_ms_data
+char	*ft_strjoin_free(char *str1, char *str2)
 {
-	char	*read_line;
-	char	*prompt;
-	t_envp	*envp;
-}			t_ms_data;
+	char	*tmp_buffer;
 
-#endif
+	tmp_buffer = ft_strjoin(str1, str2);
+	if (!tmp_buffer)
+	{
+		free(str1);
+		str1 = NULL;
+		return (NULL);
+	}
+	free(str1);
+	free(str2);
+	return (tmp_buffer);
+}

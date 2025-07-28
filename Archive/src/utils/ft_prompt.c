@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 19:33:57 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/27 19:34:26 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/20 14:39:50 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/24 22:26:41 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minishell.h"
 
 static char	*ft_first_part(void);
 static char	*ft_second_part(void);

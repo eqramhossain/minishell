@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_pwd_builtins.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 17:27:23 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 14:41:49 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/28 13:03:52 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/28 13:03:56 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-# include "envp.h"
-
-typedef struct s_ms_data
+void	ft_pwd_builtin(char *cmd, char **arg, char **envp)
 {
-	char	*read_line;
-	char	*prompt;
-	t_envp	*envp;
-}			t_ms_data;
+	char	*dir;
+	int		i;
 
-#endif
+	(void)cmd;
+	(void)envp;
+	i = 0;
+	while (arg[i])
+		i++;
+	if (i >= 2)
+		return ;
+	dir = NULL;
+	dir = getcwd(NULL, 0);
+	if (!dir)
+		perror("getcwd");
+	ft_putstr(dir);
+	ft_putchar('\n');
+	free(dir);
+}

@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strldup.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehossain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 12:59:37 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 13:00:08 by ehossain         ###   ########.fr       */
+/*   Created: 2024/11/21 11:44:25 by ehossain          #+#    #+#             */
+/*   Updated: 2024/11/21 12:00:52 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft.h"
 
-char	*ft_strldup(const char *s, size_t len)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	i;
-	char	*ptr;
+	int		i;
+	int		len;
+	char	*ptr_s;
 
 	i = 0;
-	ptr = malloc(sizeof(char) * len + 1);
-	if (!ptr)
+	len = ft_strlen(s);
+	ptr_s = malloc((len + 1) * sizeof(char));
+	if (ptr_s == NULL)
 		return (NULL);
-	while (s[i] != '\0' && i < len)
+	while (i < len)
 	{
-		ptr[i] = s[i];
+		ptr_s[i] = f(i, s[i]);
 		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	ptr_s[i] = '\0';
+	return (ptr_s);
 }

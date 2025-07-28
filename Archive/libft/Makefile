@@ -6,11 +6,20 @@
 #    By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/23 14:36:30 by ehossain          #+#    #+#              #
-#    Updated: 2025/07/27 17:15:08 by ehossain         ###   ########.fr        #
+#    Updated: 2025/07/10 15:28:20 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SOURCE = ./src/ft_atoi.c \
+SOURCE = ./src/ft_printf/ft_find_format.c \
+./src/ft_printf/ft_number_size.c \
+./src/ft_printf/ft_printf.c \
+./src/ft_printf/ft_putchar.c \
+./src/ft_printf/ft_putdec.c \
+./src/ft_printf/ft_puthexa.c \
+./src/ft_printf/ft_putptr.c \
+./src/ft_printf/ft_putstr.c \
+./src/ft_printf/ft_putuns.c \
+./src/ft_atoi.c \
 ./src/ft_bzero.c \
 ./src/ft_calloc.c \
 ./src/ft_isalnum.c \
@@ -48,7 +57,7 @@ SOURCE = ./src/ft_atoi.c \
 ./src/get_next_line/get_next_line_utils.c
 
 NAME = libft.a
-INCLUDE = include
+INCLUDE = ../include
 OBJECT = ${SOURCE:.c=.o}
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
