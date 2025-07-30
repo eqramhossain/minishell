@@ -6,15 +6,14 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 21:04:07 by ehossain          #+#    #+#              #
-#    Updated: 2025/07/28 15:07:31 by ehossain         ###   ########.fr        #
+#    Updated: 2025/07/29 15:33:27 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_MAIN = ./src/minishell.c \
 
 SRC_ENVP = ./src/envp/ft_envp_init.c \
-
-SRC_FREE = ./src/free/ft_free_ms_data.c \
+		   ./src/envp/ft_free_t_envp.c \
 
 SRC_LEXING = 
 
@@ -23,13 +22,18 @@ SRC_PARSING =
 SRC_UTILS = ./src/utils/ft_prompt.c \
 			./src/utils/ft_display_banner.c \
 			./src/utils/ft_strjoin_free.c \
+			./src/utils/ft_strldup.c \
+
+SRC_SIGNALS = ./src/signals/ft_sigquit.c \
+			  ./src/signals/ft_sigint.c \
 
 ALL_SRC = $(SRC_MAIN) \
 		  $(SRC_ENVP) \
 		  $(SRC_FREE) \
 		  $(SRC_LEXING) \
 		  $(SRC_PARSING) \
-		  $(SRC_UTILS) 
+		  $(SRC_UTILS) \
+		  $(SRC_SIGNALS) \
 
 NAME = minishell
 INCLUDE = ./include

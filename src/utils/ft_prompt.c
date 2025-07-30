@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:33:57 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/27 19:34:26 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:19:16 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ char	*ft_prompt(void)
 	char	*first_part;
 	char	*second_part;
 	char	*prompt;
+	char	*tmp;
 
 	first_part = ft_first_part();
 	second_part = ft_second_part();
-	second_part = ft_strjoin(second_part, "$> ");
-	prompt = ft_strjoin(first_part, second_part);
+	tmp = ft_strdup("$> ");
+	second_part = ft_strjoin_free(second_part, tmp);
+	prompt = ft_strjoin_free(first_part, second_part);
 	return (prompt);
 }
 

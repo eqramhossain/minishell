@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.h                                             :+:      :+:    :+:   */
+/*   ft_sigquit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 14:40:26 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 14:41:44 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/29 12:26:07 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/29 15:24:50 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#include "signals.h"
 
-# include "all_include.h"
-# include "minishell.h"
+void	ft_sigquit(void)
+{
+	struct sigaction	sa;
 
-void	ft_free_ms_data(t_ms_data *data);
-
-#endif
+	ft_memset(&sa, 0, sizeof(sa));
+	sigemptyset(&sa.sa_mask);
+	sa.sa_handler = SIG_IGN;
+	sa.sa_flags = 0;
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+	{
+		perror("SIGQUIT");
+		return ;
+	}
+}

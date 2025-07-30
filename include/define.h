@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_ms_data.c                                  :+:      :+:    :+:   */
+/*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 19:17:11 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 14:42:06 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/28 18:57:48 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/28 18:59:40 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "free.h"
+#ifndef DEFINE_H
+# define DEFINE_H
 
-void	ft_free_ms_data(t_ms_data *data)
-{
-	(void)data;
-}
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+
+#endif

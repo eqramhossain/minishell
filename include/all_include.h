@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 18:47:07 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/27 22:11:45 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/07/29 12:35:42 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <time.h>
 # include <unistd.h>
 
 #endif
