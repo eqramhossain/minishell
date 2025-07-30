@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   ft_inisialize_t_token.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 18:57:48 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/28 18:59:40 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/30 20:15:46 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/30 20:15:57 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#include "lexing.h"
 
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
-
-#endif
+void	ft_inisialize_t_token(t_token *token)
+{
+	token->type = 0;
+	token->value = NULL;
+	token->next = NULL;
+}

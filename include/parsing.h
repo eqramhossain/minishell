@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 19:31:50 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/30 16:21:39 by ehossain         ###   ########.fr       */
+/*   Created: 2025/07/30 20:26:03 by ehossain          #+#    #+#             */
+/*   Updated: 2025/07/30 20:30:44 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef PARSING_H
+# define PARSING_H
 
-# include "all_include.h"
-
-# define PROMPT "➜ ehro@minishell:~"
-# define RESET "\001\033[0m\002"
-# define RED "\001\033[31m\002"
-# define GREEN "\001\033[32m\002"
-# define BLUE "\001\033[34m\002"
-
-void	ft_display_banner(void);
-char	*ft_prompt(void);
-
-char	*ft_strjoin_free(char *str1, char *str2);
-char	*ft_strldup(const char *s, size_t len);
+typedef struct s_parsing
+{
+	char	c;
+}			t_parsing;
 
 #endif
