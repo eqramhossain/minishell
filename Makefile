@@ -6,16 +6,23 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 21:04:07 by ehossain          #+#    #+#              #
-#    Updated: 2025/07/29 15:33:27 by ehossain         ###   ########.fr        #
+#    Updated: 2025/08/05 15:30:53 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_MAIN = ./src/minishell.c \
+		   ./src/ft_init_lex_ms_data.c \
+		   ./src/ft_check_close_quote.c \
 
 SRC_ENVP = ./src/envp/ft_envp_init.c \
 		   ./src/envp/ft_free_t_envp.c \
 
-SRC_LEXING = 
+SRC_TOKENIZE = ./src/tokenize/ft_tokenize_start.c \
+			   ./src/tokenize/utils.c \
+			   ./src/tokenize/ft_tokenize_operator.c \
+			   ./src/tokenize/ft_add_token.c \
+			   ./src/tokenize/ft_new_token.c \
+			   ./src/tokenize/ft_insert_t_token.c \
 
 SRC_PARSING = 
 
@@ -27,13 +34,16 @@ SRC_UTILS = ./src/utils/ft_prompt.c \
 SRC_SIGNALS = ./src/signals/ft_sigquit.c \
 			  ./src/signals/ft_sigint.c \
 
+SRC_SYNTAX = ./src/syntax_error/ft_ms_syntax_error.c \
+
 ALL_SRC = $(SRC_MAIN) \
 		  $(SRC_ENVP) \
 		  $(SRC_FREE) \
-		  $(SRC_LEXING) \
+		  $(SRC_TOKENIZE) \
 		  $(SRC_PARSING) \
 		  $(SRC_UTILS) \
 		  $(SRC_SIGNALS) \
+		  $(SRC_SYNTAX) \
 
 NAME = minishell
 INCLUDE = ./include
@@ -76,3 +86,4 @@ re : fclean all
 RED = \033[0;31m
 GREEN = \033[0;32m
 END = \033[0m
+

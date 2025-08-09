@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_check_close_quote.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 17:27:23 by ehossain          #+#    #+#             */
-/*   Updated: 2025/08/05 15:11:40 by ehossain         ###   ########.fr       */
+/*   Created: 2025/08/04 18:57:36 by ehossain          #+#    #+#             */
+/*   Updated: 2025/08/04 20:51:58 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "all_include.h"
-# include "envp.h"
-# include "tokenize.h"
-
-typedef struct s_ms_data
+int	ft_check_close_quote(char *input)
 {
-	char	*input;
-	char	*prompt;
-	t_envp	*envp;
-	t_token	*token;
-}			t_ms_data;
+	size_t	i;
+	char	c;
 
-void		ft_main_loop(t_ms_data *data);
-
-void		ft_inisialize_t_ms_data(t_ms_data *data, char **envp);
-t_token		*ft_tokenizer_init(void);
-
-int			ft_check_close_quote(char *input);
-
-#endif
+	i = 0;
+	c = 0;
+	while (input[i] != '\0')
+	{
+		if (input[i] == SINGLE_QUOTE || input[i] == DOUBLE_QUOTE)
+		{
+			c = input[i];
+			i++;
+			while (input[i] && input[i] != c)
+				i++;
+			if (input[i] && input[i] == c)
+				i++;
+			else
+				return (0);
+		}
+		else
+			i++;
+	}
+	return (1);
+}

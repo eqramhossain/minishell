@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexing.c                                        :+:      :+:    :+:   */
+/*   ft_add_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 19:23:57 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/30 20:15:15 by ehossain         ###   ########.fr       */
+/*   Created: 2025/08/04 15:30:24 by ehossain          #+#    #+#             */
+/*   Updated: 2025/08/04 17:28:02 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexing.h"
+#include "tokenize.h"
 
-t_lexing	*ft_lexing_init(char *input)
+void	ft_add_token(t_token **token, char *value, t_token_type type,
+		size_t len)
 {
-	t_token	token;
+	t_token	*head;
+	t_token	*new_token;
 
-	ft_inisialize_t_token(&token);
+	head = *token;
+	while (head->next)
+		head = head->next;
+	new_token = ft_new_token(value, type, len);
+	if (!new_token)
+		return ;
+	head->next = new_token;
 }

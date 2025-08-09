@@ -6,7 +6,7 @@
 /*   By: roussada <roussada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:41:59 by roussada          #+#    #+#             */
-/*   Updated: 2025/07/25 19:10:23 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/08/04 14:46:42 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,9 @@ int	ft_isword(char c)
 
 char	ft_peak(t_lexer *lexer)
 {
-	return (lexer->input[lexer->pos]);
+	if (lexer->input[lexer->pos])
+		return (lexer->input[lexer->pos]);
+	return ('\0');
 }
 
 /**

@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_new_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 17:27:23 by ehossain          #+#    #+#             */
-/*   Updated: 2025/08/05 15:11:40 by ehossain         ###   ########.fr       */
+/*   Created: 2025/08/04 15:37:18 by ehossain          #+#    #+#             */
+/*   Updated: 2025/08/04 16:02:33 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "tokenize.h"
 
-# include "all_include.h"
-# include "envp.h"
-# include "tokenize.h"
-
-typedef struct s_ms_data
+t_token	*ft_new_token(char *value, t_token_type type, size_t len)
 {
-	char	*input;
-	char	*prompt;
-	t_envp	*envp;
-	t_token	*token;
-}			t_ms_data;
+	t_token	*new_lst;
 
-void		ft_main_loop(t_ms_data *data);
-
-void		ft_inisialize_t_ms_data(t_ms_data *data, char **envp);
-t_token		*ft_tokenizer_init(void);
-
-int			ft_check_close_quote(char *input);
-
-#endif
+	new_lst = ft_calloc(sizeof(t_token), 1);
+	if (!new_lst)
+		return (NULL);
+	new_lst->value = ft_strldup(value, len);
+	new_lst->type = type;
+	new_lst->next = NULL;
+	return (new_lst);
+}

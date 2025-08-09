@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexing.h                                           :+:      :+:    :+:   */
+/*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:31:52 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/30 20:14:41 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:27:56 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXING_H
-# define LEXING_H
+#ifndef TOKENIZE_H
+# define TOKENIZE_H
 
 # include "all_include.h"
+# include "utils.h"
 
 typedef enum e_token_type
 {
@@ -31,21 +32,28 @@ typedef enum e_token_type
 
 typedef struct s_token
 {
-	t_token_type	type;
 	char			*value;
+	t_token_type	type;
 	struct s_token	*next;
 }					t_token;
 
-typedef struct s_lexing
+typedef struct s_var_token
 {
 	char			*input;
 	char			curr_char;
-	size_t			char_pos;
+	size_t			curr_pos;
 	size_t			token_count;
-}					t_lexing;
+}					t_var_token;
 
-t_lexing			*ft_lexing_init(char *input);
+t_token				*ft_start_tokenizer(char *input);
+void				ft_add_token(t_token **token, char *value,
+						t_token_type type, size_t len);
+t_token				*ft_new_token(char *value, t_token_type type, size_t len);
 
-void				ft_inisialize_t_token(t_token *token);
+void				ft_skip_whitespaces(t_var_token *var);
+char				ft_get_curr_char(t_var_token *var);
+
+int					ft_check_operator(t_var_token *var);
+void				ft_tokenize_operator(t_token **token, t_var_token *var);
 
 #endif

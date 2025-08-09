@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_all_inisialize.c                                :+:      :+:    :+:   */
+/*   ft_ms_syntax_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 20:09:12 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/30 20:16:03 by ehossain         ###   ########.fr       */
+/*   Created: 2025/08/05 15:24:41 by ehossain          #+#    #+#             */
+/*   Updated: 2025/08/05 15:50:25 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexing.h"
-#include "minishell.h"
+#include "syntax.h"
 
-void	ft_inisialize_t_ms_data(t_ms_data *data, char **envp)
+int	ft_ms_syntax_error(char *input)
 {
-	data->input = NULL;
-	data->prompt = NULL;
-	data->envp = ft_get_envp(envp);
-}
+	t_syntax	syntax;
 
-void	ft_inisialize_t_lexing(t_lexing *lexing)
-{
-	lexing->input = NULL;
-	lexing->curr_char = '\0';
-	lexing->char_pos = 0;
-	lexing->token_count = 0;
+	ft_memset(&syntax, 0, sizeof(t_syntax));
+	syntax.input = ft_strtrim(input, " ");
+	syntax.len_input = ft_strlen(syntax.input) - 1;
+	return (0);
 }
