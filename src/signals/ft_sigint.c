@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:26:04 by ehossain          #+#    #+#             */
-/*   Updated: 2025/07/29 15:47:20 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/08/15 20:59:25 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ static void	ft_sigint_hadler(int signal, siginfo_t *info, void *contex)
 	(void)contex;
 	(void)signal;
 	write(STDOUT_FILENO, "\n", 1);
+	// char	**argv;
+	// pid_t	id;
+	// argv = malloc(sizeof(char *) * 2);
+	// argv[0] = "../../../program_a/program_a";
+	// argv[1] = NULL;
+	// id = fork();
+	// if (id == 0)
+	// {
+	// 	execve("../../../program_a/program_a", argv, NULL);
+	// }
+	// usleep(500);
 	rl_on_new_line();
 	rl_redisplay();
 }
