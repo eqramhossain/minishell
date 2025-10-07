@@ -1,0 +1,8 @@
+*.o
+libft.a
+minishell
+a.out
+.cache/
+compile_commands.json
+test/
+Archive/
