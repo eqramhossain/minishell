@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 23:05:56 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/20 18:12:03 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/08 11:59:58 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/20 15:13:00 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef ENVP_H
+# define ENVP_H
 
-# include "environment.h"
 # include "structures_def.h"
-# include "syntax.h"
-# include "tokenizer.h"
-# include "utils.h"
+
+t_envp	*ft_get_envp(char **envp);
+void	ft_free_t_envp(t_envp **envp_node);
 
 #endif

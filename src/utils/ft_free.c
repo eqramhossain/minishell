@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 23:05:56 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/20 18:12:03 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/08 21:57:03 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/18 15:56:08 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "utils.h"
 
-# include "environment.h"
-# include "structures_def.h"
-# include "syntax.h"
-# include "tokenizer.h"
-# include "utils.h"
-
-#endif
+void	ft_free(void **content)
+{
+	if (content && *content)
+	{
+		free(*content);
+		*content = NULL;
+	}
+}

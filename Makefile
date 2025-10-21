@@ -3,16 +3,40 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+         #
+#    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 09:31:00 by ehossain          #+#    #+#              #
-#    Updated: 2025/10/07 23:04:25 by ehossain         ###   ########.fr        #
+#    Updated: 2025/10/20 22:42:09 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_MAIN = ./src/minishell.c \
 
+SRC_SYNTAX_ERROR = ./src/syntax_error/ft_check_error_syntax.c \
+				   ./src/syntax_error/ft_check_reinit_syntax.c \
+				   ./src/syntax_error/ft_ms_syntax_error.c \
+				   ./src/syntax_error/ft_quote_syntax.c \
+				   ./src/syntax_error/ft_redir_syntax.c \
+				   ./src/syntax_error/ft_pipe_syntax.c \
+
+SRC_TOKENS =./src/tokenizer/ft_handle_operator.c \
+			./src/tokenizer/ft_handle_quote.c \
+			./src/tokenizer/ft_handle_variable.c \
+			./src/tokenizer/ft_handle_word.c \
+			./src/tokenizer/ft_print_tokens.c \
+			./src/tokenizer/ft_token_checks.c \
+			./src/tokenizer/ft_token_utils.c \
+			./src/tokenizer/tokenize.c
+
+SRC_UTILS = ./src/utils/ft_prompt.c \
+			./src/utils/ft_free.c \
+			./src/utils/ft_strjoin_free.c \
+			./src/utils/ft_strldup.c \
+
 ALL_SRC = $(SRC_MAIN) \
+		  $(SRC_UTILS) \
+		  $(SRC_SYNTAX_ERROR) \
+		  $(SRC_TOKENS) \
 
 NAME = minishell
 INCLUDE = ./include
@@ -58,7 +82,7 @@ re : fclean all
 
 loading:
 	@for i in $$(seq 1 30); do \
-		sleep 0.01; \
+		sleep 0.001; \
 		printf "\r[%-30s] %d%%" "$$(printf '#%.0s' $$(seq 1 $$i))" $$((i*100/30)); \
 	done; \
 

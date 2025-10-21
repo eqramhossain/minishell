@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 23:05:56 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/20 18:12:03 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/21 13:15:38 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/21 13:16:27 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-# include "environment.h"
-# include "structures_def.h"
-# include "syntax.h"
-# include "tokenizer.h"
-# include "utils.h"
+#ifndef PARSER_H
+# define PARSER_H
 
 #endif
