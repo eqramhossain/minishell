@@ -1,0 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_environment.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/28 14:43:35 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/21 17:49:49 by ehossain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "environment.h"
+
+static void	ft_t_envp_init(t_envp **envp);
+static void	ft_lstadd_t_envp(t_envp **head, t_envp *new_lst);
+// static void	ft_print_t_envp(t_envp **envp_head);
+static void	ft_getenv(t_envp **envp_node);
+
+t_envp	*ft_get_envp(char **envp)
+{
+	size_t	i;
+	size_t	j;
+	t_envp	*node_envp;
+	t_envp	*current_node;
+
+	i = 0;
+	while (envp[i])
+	{
+		j = 0;
+		while (envp[i][j] != '=')
+			j++;
+		if (i == 0)
+		{
+			ft_t_envp_init(&node_envp);
+			node_envp->key = ft_calloc(sizeof(char), j + 1);
+			ft_strlcpy(node_envp->key, envp[i], j + 1);
+		}
+		else if (i > 0)
+		{
+			ft_t_envp_init(&current_node);
+			current_node->key = ft_calloc(sizeof(char), j + 1);
+			ft_strlcpy(current_node->key, envp[i], j + 1);
+			ft_lstadd_t_envp(&node_envp, current_node);
+		}
+		i++;
+	}
+	ft_getenv(&node_envp);
+	// ft_print_t_envp(&node_envp);
+	return (node_envp);
+}
+
+static void	ft_t_envp_init(t_envp **envp)
+{
+	*envp = ft_calloc(sizeof(t_envp), 1);
+	(*envp)->key = NULL;
+	(*envp)->value = NULL;
+	(*envp)->next = NULL;
+}
+
+static void	ft_lstadd_t_envp(t_envp **head, t_envp *new_lst)
+{
+	t_envp	*tmp;
+
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new_lst;
+}
+
+// static void	ft_print_t_envp(t_envp **envp)
+// {
+// 	t_envp	*current;
+//
+// 	current = *envp;
+// 	while (current->next)
+// 	{
+// 		printf("%s=", current->key);
+// 		printf("%s\n", current->value);
+// 		current = current->next;
+// 	}
+// }
+
+static void	ft_getenv(t_envp **node_envp)
+{
+	t_envp	*current;
+
+	current = *node_envp;
+	while (current->next != NULL)
+	{
+		current->value = ft_strdup(getenv(current->key));
+		current = current->next;
+	}
+}

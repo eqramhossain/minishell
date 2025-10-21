@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parser_pipeline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 23:05:56 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/21 17:29:30 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/21 18:14:16 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/21 18:26:09 by ekram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parser.h"
 
-# include "environment.h"
-# include "parser.h"
-# include "structures_def.h"
-# include "syntax.h"
-# include "tokenizer.h"
-# include "utils.h"
+int	ft_count_pipes(t_token *tokens)
+{
+	int	count;
 
-#endif
+	count = 0;
+	while (tokens && tokens->type != TOKEN_EOF)
+	{
+		if (tokens->type == TOKEN_PIPE)
+			count++;
+		tokens = tokens->next;
+	}
+	return (count);
+}

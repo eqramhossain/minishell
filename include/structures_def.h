@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:10:35 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/20 18:11:54 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:56:09 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,15 +129,6 @@ typedef struct s_tokenizer
 }					t_tokenizer;
 
 /* ========================================================================== */
-/*                           PARSER STRUCTURE                                 */
-/* ========================================================================== */
-
-typedef struct s_parser
-{
-	t_tokenizer		*tokens;
-}					t_parser;
-
-/* ========================================================================== */
 /*								ENVIRONMENT STRUCTURE                         */
 /* ========================================================================== */
 
@@ -147,6 +138,34 @@ typedef struct s_envp
 	char			*value;
 	struct s_envp	*next;
 }					t_envp;
+
+/* ========================================================================== */
+/*                           PARSER STRUCTURE                                 */
+/* ========================================================================== */
+
+// redirection node (for <, >, >>, <<)
+typedef struct s_redir
+{
+	int type;   // one of TOKEN_REDIR_* or TOKEN_HEREDOC
+	char *file; // filename or limiter for heredoc
+	int				fd;
+	struct s_redir	*next;
+}					t_redir;
+
+// command node
+typedef struct s_cmd
+{
+	char **argv;        // arguments, like {"echo", "hello", NULL}
+	t_redir *redir;     // linked list of redirections
+	struct s_cmd *next; // next command in pipeline
+}					t_cmd;
+
+// the parsed structure (for entire line)
+typedef struct s_parser
+{
+	t_cmd *cmds; // list of commands separated by pipes
+	struct s_parser	*next;
+}					t_parser;
 
 /* ========================================================================== */
 /*                            COMMAND STRUCTURE                               */
@@ -163,18 +182,6 @@ typedef enum e_redir_type
 	REDIR_APPEND,  // >> file
 	REDIR_HEREDOC, // << delimiter
 }					t_redir_type;
-
-/*
- * Redirection structure - represents a single I/O redirection
- * A command can have multiple redirections (e.g., < in > out)
- */
-typedef struct s_redir
-{
-	t_redir_type type;    // Type of redirection
-	char *file;           // Filename or heredoc delimiter
-	int fd;               // File descriptor (if opened)
-	struct s_redir *next; // Next redirection in the list
-}					t_redir;
 
 /*
  * Command structure - represents a single command in the pipeline
@@ -201,7 +208,9 @@ typedef struct s_ms_data
 	char *input;         // User input
 	char **envp_arg;     // cpy of envp
 	t_envp *envp;        // Envp list
+	t_envp *envp_cp;     // Copy
 	t_token *tokens;     // Token lists
+	t_parser *parser;    // Parser list
 	t_command *commands; // Command list
 
 }					t_ms_data;

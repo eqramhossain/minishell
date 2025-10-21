@@ -6,7 +6,7 @@
 /*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 23:06:31 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/21 13:15:21 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:26:09 by ekram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,15 @@ int	main(int ac, char **av, char **envp)
 
 static void	ft_init_ms_data(t_ms_data *data, char **envp)
 {
+	data->exit_status = -1;
+	data->running = -1;
 	data->prompt = NULL;
 	data->input = NULL;
 	data->envp_arg = envp;
-	data->envp = ft_calloc(1, sizeof(t_envp));
+	data->envp = ft_get_envp(envp);
+	data->envp_cp = ft_get_envp(envp);
 	data->tokens = ft_calloc(1, sizeof(t_token));
+	data->commands = ft_calloc(1, sizeof(t_token));
 }
 
 static void	ft_main_loop(t_ms_data *data)
@@ -42,12 +46,10 @@ static void	ft_main_loop(t_ms_data *data)
 	// ft_setup_signals(); // Set up signal handlers for interactive mode
 	while (1)
 	{
-		// Create prompt and get input
 		data->prompt = ft_prompt();
 		data->input = readline(data->prompt);
 		free(data->prompt);
 		data->prompt = NULL;
-		// Handle EOF (Ctrl+D)
 		if (!data->input)
 		{
 			ft_putstr_fd("\nexit\n", STDERR);
@@ -57,7 +59,6 @@ static void	ft_main_loop(t_ms_data *data)
 		if (data->input[0] != '\0')
 		{
 			add_history(data->input);
-			// Check for syntax errors before tokenization
 			if (ft_ms_syntax_error(data->input) != 0)
 			{
 				data->exit_status = 258; // Bash uses 258 for syntax errors
@@ -70,20 +71,16 @@ static void	ft_main_loop(t_ms_data *data)
 			{
 				ft_print_tokens(data->tokens);
 				// Tokenization successful - proceed with parsing
-				// TODO: Parse tokens into command structures
-				data->commands = ft_parse_commands(data->tokens);
-				if (data->commands != NULL)
+				data->parser = ft_parser(data->tokens);
+				if (data->parser != NULL)
 				{
-					ft_print_commands(data->commands);
-					//     // TODO: Expand environment variables
-					//     // ft_expand_variables(data);
-					//
-					//     // TODO: Execute the commands
-					//     // ft_execute_commands(data);
-					//
-					//     // TODO: Clean up command structures
-					ft_free_commands(data->commands);
-					data->commands = NULL;
+					ft_print_parser(data->parser);
+					// TODO: Execute the commands
+					// ft_execute_commands(data);
+					
+					// Clean up parser structures
+					ft_free_parser(data->parser);
+					data->parser = NULL;
 				}
 				// Clean up tokens after use
 				ft_free_tokens(data->tokens);

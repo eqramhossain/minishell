@@ -6,7 +6,7 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 09:31:00 by ehossain          #+#    #+#              #
-#    Updated: 2025/10/20 22:42:09 by ehossain         ###   ########.fr        #
+#    Updated: 2025/10/21 18:26:09 by ekram            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,15 @@ SRC_TOKENS =./src/tokenizer/ft_handle_operator.c \
 			./src/tokenizer/ft_token_utils.c \
 			./src/tokenizer/tokenize.c
 
+SRC_PARSER = ./src/parser/parser.c \
+			 ./src/parser/parser_command.c \
+			 ./src/parser/parser_pipeline.c \
+			 ./src/parser/parse_redirection.c \
+			 ./src/parser/parser_utils.c
+
+SRC_ENVIRONMENT = ./src/environment/get_environment.c \
+				  ./src/environment/ft_free_t_envp.c
+
 SRC_UTILS = ./src/utils/ft_prompt.c \
 			./src/utils/ft_free.c \
 			./src/utils/ft_strjoin_free.c \
@@ -37,6 +46,8 @@ ALL_SRC = $(SRC_MAIN) \
 		  $(SRC_UTILS) \
 		  $(SRC_SYNTAX_ERROR) \
 		  $(SRC_TOKENS) \
+		  $(SRC_PARSER) \
+		  $(SRC_ENVIRONMENT) \
 
 NAME = minishell
 INCLUDE = ./include
