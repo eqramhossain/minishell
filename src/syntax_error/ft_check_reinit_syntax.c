@@ -6,35 +6,12 @@
 /*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:18:39 by gmarquis          #+#    #+#             */
-/*   Updated: 2025/10/21 13:03:05 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/22 12:05:26 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "syntax.h"
 
-/*
-** This file manages the "state machine" - resetting flags when appropriate
-**
-** WHY DO WE NEED THIS?
-** When checking syntax, we use flags to track if we just saw:
-** - A redirection operator (< > << >>)
-** - A pipe operator (|)
-**
-** We need to RESET these flags when we encounter actual content (filenames,
-** commands, etc.) to avoid false positives.
-**
-** Example: "cat < file.txt"
-** - We see '<', set r_in = 1
-** - We see 'f' (start of filename), RESET r_in = 0
-** - This tells us the redirection has a valid filename
-*/
-
-/*
-** Check if character should reset redirection flags
-** We reset when we hit actual content (not spaces, operators, or redirections)
-**
-** Returns: 1 if we should reset redirection flags, 0 otherwise
-*/
 static int	st_reinit_redir(char c)
 {
 	if (c != ' ' && c != '\t' && c != '|' && c != '<' && c != '>'
@@ -43,12 +20,6 @@ static int	st_reinit_redir(char c)
 	return (0);
 }
 
-/*
-** Check if character should reset pipe flag
-** We reset when we hit actual content (not spaces or pipes)
-**
-** Returns: 1 if we should reset pipe flag, 0 otherwise
-*/
 static int	st_reinit_pipe(char c)
 {
 	if (c != ' ' && c != '\t' && c != '|' && ft_isascii(c))
@@ -56,18 +27,6 @@ static int	st_reinit_pipe(char c)
 	return (0);
 }
 
-/*
-** Main reinitialization function - manages state machine
-**
-** Called for each character during syntax checking
-**
-** What it does:
-** 1. Resets redirection flags when we hit actual content (filename/command)
-** 2. Resets pipe flag when we hit actual content (command after pipe)
-** 3. Calls redirection and pipe checkers when we hit operators
-**
-** Returns: 1 if error detected, 0 if OK to continue
-*/
 int	ft_check_reinit(t_syntax **syntax)
 {
 	t_syntax	*synt;

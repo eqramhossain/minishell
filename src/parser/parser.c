@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:56:57 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/21 18:13:12 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/22 12:43:32 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_parser	*ft_parser(t_token *tokens)
 
 	if (!tokens)
 		return (NULL);
-	parser = (t_parser *)malloc(sizeof(t_parser));
+	parser = ft_calloc(1, sizeof(t_parser));
 	if (!parser)
 		return (NULL);
 	parser->cmds = NULL;

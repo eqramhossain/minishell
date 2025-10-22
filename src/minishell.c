@@ -6,7 +6,7 @@
 /*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 23:06:31 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/21 18:26:09 by ekram            ###   ########.fr       */
+/*   Updated: 2025/10/22 12:09:40 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,13 @@ static void	ft_main_loop(t_ms_data *data)
 				if (data->parser != NULL)
 				{
 					ft_print_parser(data->parser);
+					// TODO: Expand environment variables
+					// ft_expand_variables(data);
 					// TODO: Execute the commands
 					// ft_execute_commands(data);
-					
-					// Clean up parser structures
+					// TODO: Clean up command structures
+					// ft_free_commands(data->commands);
+					// data->commands = NULL;
 					ft_free_parser(data->parser);
 					data->parser = NULL;
 				}

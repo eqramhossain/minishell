@@ -6,7 +6,7 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 09:31:00 by ehossain          #+#    #+#              #
-#    Updated: 2025/10/21 18:26:09 by ekram            ###   ########.fr        #
+#    Updated: 2025/10/22 11:36:10 by ekram            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,7 @@ SRC_TOKENS =./src/tokenizer/ft_handle_operator.c \
 
 SRC_PARSER = ./src/parser/parser.c \
 			 ./src/parser/parser_command.c \
-			 ./src/parser/parser_pipeline.c \
-			 ./src/parser/parse_redirection.c \
-			 ./src/parser/parser_utils.c
+			 ./src/parser/parse_redirection.c
 
 SRC_ENVIRONMENT = ./src/environment/get_environment.c \
 				  ./src/environment/ft_free_t_envp.c

@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:43:35 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/21 17:49:49 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:14:13 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,16 @@ static void	ft_lstadd_t_envp(t_envp **head, t_envp *new_lst)
 static void	ft_getenv(t_envp **node_envp)
 {
 	t_envp	*current;
+	char	*env_value;
 
 	current = *node_envp;
-	while (current->next != NULL)
+	while (current != NULL)
 	{
-		current->value = ft_strdup(getenv(current->key));
+		env_value = getenv(current->key);
+		if (env_value)
+			current->value = ft_strdup(env_value);
+		else
+			current->value = NULL;
 		current = current->next;
 	}
 }

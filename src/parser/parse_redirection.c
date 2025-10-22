@@ -6,18 +6,12 @@
 /*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 13:25:00 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/21 18:26:07 by ekram            ###   ########.fr       */
+/*   Updated: 2025/10/22 11:45:57 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-/*
-** Create a new redirection node
-** 
-** type: TOKEN_REDIR_IN, TOKEN_REDIR_OUT, TOKEN_APPEND, or TOKEN_HEREDOC
-** file: the filename or heredoc delimiter (quotes already removed)
-*/
 static t_redir	*create_redir(int type, char *file)
 {
 	t_redir	*redir;
@@ -32,29 +26,17 @@ static t_redir	*create_redir(int type, char *file)
 		free(redir);
 		return (NULL);
 	}
-	ft_remove_quotes_inplace(redir->file);
 	redir->fd = -1;
 	redir->next = NULL;
 	return (redir);
 }
 
-/*
-** Check if current token is a redirection operator
-*/
 static int	is_redir_token(t_token_type type)
 {
 	return (type == TOKEN_REDIR_IN || type == TOKEN_REDIR_OUT
 		|| type == TOKEN_APPEND || type == TOKEN_HEREDOC);
 }
 
-/*
-** Parse all consecutive redirections from current position
-** 
-** Format: < infile > outfile >> append << heredoc
-** Each redirection operator must be followed by a filename/delimiter
-** 
-** Returns: linked list of t_redir nodes, or NULL if no redirections
-*/
 t_redir	*ft_parse_redirections(t_token **tokens)
 {
 	t_redir	*redir_list;
@@ -82,10 +64,6 @@ t_redir	*ft_parse_redirections(t_token **tokens)
 	return (redir_list);
 }
 
-/*
-** Add a redirection to the end of the list
-** Used to maintain order of redirections as they appear in input
-*/
 void	ft_add_redir(t_redir **list, t_redir *new)
 {
 	t_redir	*current;

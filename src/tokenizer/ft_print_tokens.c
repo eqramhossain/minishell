@@ -6,7 +6,7 @@
 /*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 22:35:10 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/20 23:00:02 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/22 11:46:43 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_print_tokens(t_token *head)
 		val = head->value;
 		if (!val)
 			val = "(null)";
-		printf("[token %zu] type=%s, value=\"%s\"\n", i, type_str, val);
+		printf("[token %zu] type=%s, value=%s\n", i, type_str, val);
 		head = head->next;
 		i++;
 	}
