@@ -6,7 +6,7 @@
 /*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 13:20:00 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 14:24:16 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:50:16 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,12 @@ t_cmd	*ft_parse_command(t_token **tokens)
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
+	cmd->pid = -1;
 	cmd->argv = NULL;
+	cmd->argc = -1;
 	cmd->redir = NULL;
+	cmd->pipe_fd[0] = -1;
+	cmd->pipe_fd[1] = -1;
 	cmd->next = NULL;
 	argc = count_args(*tokens);
 	argv = malloc(sizeof(char *) * (argc + 1));

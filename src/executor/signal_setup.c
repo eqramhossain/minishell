@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   signal_setup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 17:04:22 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 17:39:19 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/22 20:30:00 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/22 20:30:00 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "executor.h"
 
-# include "structures_def.h"
-# include "utils.h"
-
-/* Built-in command implementations */
-int	ft_pwd(void);
-int	ft_echo(char **args);
-int	ft_envp(t_envp *env);
-int	ft_cd(char **args, t_ms_data *ms_data);
-int	ft_export(char **args, t_ms_data *ms_data);
-int	ft_unset(char **args, t_ms_data *ms_data);
-int	ft_exit(char **args, t_ms_data *ms_data);
-
-#endif
+/**
+ * Setup default signal handlers for child processes
+ * Children should handle signals normally (not like the shell)
+ */
+void	setup_child_signals(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}

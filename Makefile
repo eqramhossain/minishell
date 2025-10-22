@@ -6,7 +6,7 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 09:31:00 by ehossain          #+#    #+#              #
-#    Updated: 2025/10/22 17:43:15 by ehossain         ###   ########.fr        #
+#    Updated: 2025/10/22 21:56:51 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,12 +43,23 @@ SRC_BUILTINS = ./src/builtins/pwd_builtin.c \
 			   ./src/builtins/env_builtin.c \
 			   ./src/builtins/echo_builtin.c 
 
+SRC_EXECUTOR = src/executor/executor.c \
+			   src/executor/single_command.c \
+			   src/executor/external_command.c \
+			   src/executor/pipeline.c \
+			   src/executor/redirections.c \
+			   src/executor/path_finder.c \
+			   src/executor/env_utils.c \
+			   src/executor/builtin_executor.c \
+			   src/executor/signal_setup.c
+
 SRC_UTILS = ./src/utils/ft_prompt.c \
 			./src/utils/ft_free.c \
 			./src/utils/ft_strjoin_free.c \
 			./src/utils/ft_strldup.c \
 			./src/utils/ft_strcmp.c \
-			./src/utils/ft_putendl.c
+			./src/utils/ft_putendl.c \
+			./src/utils/ft_edge.c \
 
 ALL_SRC = $(SRC_MAIN) \
 		  $(SRC_SIGNAL) \

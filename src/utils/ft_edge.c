@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_edge.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 17:04:22 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 17:39:19 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/22 18:08:08 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/22 19:11:38 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "utils.h"
 
-# include "structures_def.h"
-# include "utils.h"
-
-/* Built-in command implementations */
-int	ft_pwd(void);
-int	ft_echo(char **args);
-int	ft_envp(t_envp *env);
-int	ft_cd(char **args, t_ms_data *ms_data);
-int	ft_export(char **args, t_ms_data *ms_data);
-int	ft_unset(char **args, t_ms_data *ms_data);
-int	ft_exit(char **args, t_ms_data *ms_data);
-
-#endif
+int	ft_edge(char *str)
+{
+	if ((str[0] == ';' || str[0] == ':' || str[0] == '\\' || str[0] == '!')
+		&& (str[1]) == '\0')
+		return (ERROR);
+	return (SUCCESS);
+}

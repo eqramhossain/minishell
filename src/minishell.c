@@ -6,7 +6,7 @@
 /*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 23:06:31 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 15:03:26 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:01:58 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	ft_init_ms_data(t_ms_data *data, char **envp)
 	data->envp = ft_get_envp(envp);
 	data->envp_cp = ft_get_envp(envp);
 	data->tokens = ft_calloc(1, sizeof(t_token));
-	data->commands = ft_calloc(1, sizeof(t_token));
 }
 
 static void	ft_main_loop(t_ms_data *data)
@@ -56,7 +55,7 @@ static void	ft_main_loop(t_ms_data *data)
 			break ;
 		}
 		// Skip empty inputs but add non-empty commands to history
-		if (data->input[0] != '\0')
+		if (data->input[0] != '\0' && ft_edge(data->input) == SUCCESS)
 		{
 			add_history(data->input);
 			if (ft_ms_syntax_error(data->input) != 0)
