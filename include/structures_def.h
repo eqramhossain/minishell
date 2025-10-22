@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:10:35 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/21 17:56:09 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/22 17:06:29 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define STDOUT 1
 # define STDERR 2
 
-# define RETURN_SUCCESS 0
-# define RETURN_FAILURE 1
+# define SUCCESS 0
+# define ERROR 1
 
 # define TRUE 1
 # define FALSE 0

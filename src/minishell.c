@@ -6,7 +6,7 @@
 /*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 23:06:31 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 12:09:40 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:03:26 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_init_ms_data(t_ms_data *data, char **envp)
 static void	ft_main_loop(t_ms_data *data)
 {
 	ft_display_banner();
-	// ft_setup_signals(); // Set up signal handlers for interactive mode
+	ft_setup_signal();
 	while (1)
 	{
 		data->prompt = ft_prompt();

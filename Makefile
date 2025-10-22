@@ -6,11 +6,15 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 09:31:00 by ehossain          #+#    #+#              #
-#    Updated: 2025/10/22 11:36:10 by ekram            ###   ########.fr        #
+#    Updated: 2025/10/22 17:43:15 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_MAIN = ./src/minishell.c \
+
+SRC_SIGNAL = ./src/signals/ft_sigint.c \
+			 ./src/signals/ft_sigquit.c \
+			 ./src/signals/ft_setup_signal.c \
 
 SRC_SYNTAX_ERROR = ./src/syntax_error/ft_check_error_syntax.c \
 				   ./src/syntax_error/ft_check_reinit_syntax.c \
@@ -35,17 +39,25 @@ SRC_PARSER = ./src/parser/parser.c \
 SRC_ENVIRONMENT = ./src/environment/get_environment.c \
 				  ./src/environment/ft_free_t_envp.c
 
+SRC_BUILTINS = ./src/builtins/pwd_builtin.c \
+			   ./src/builtins/env_builtin.c \
+			   ./src/builtins/echo_builtin.c 
+
 SRC_UTILS = ./src/utils/ft_prompt.c \
 			./src/utils/ft_free.c \
 			./src/utils/ft_strjoin_free.c \
 			./src/utils/ft_strldup.c \
+			./src/utils/ft_strcmp.c \
+			./src/utils/ft_putendl.c
 
 ALL_SRC = $(SRC_MAIN) \
-		  $(SRC_UTILS) \
+		  $(SRC_SIGNAL) \
 		  $(SRC_SYNTAX_ERROR) \
 		  $(SRC_TOKENS) \
 		  $(SRC_PARSER) \
 		  $(SRC_ENVIRONMENT) \
+		  $(SRC_BUILTINS) \
+		  $(SRC_UTILS) \
 
 NAME = minishell
 INCLUDE = ./include
