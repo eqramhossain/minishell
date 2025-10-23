@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 20:30:00 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 20:30:00 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/23 11:32:38 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:32:40 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,7 @@ static char	*search_in_path(char **paths, char *command)
 	return (NULL);
 }
 
-/**
- * Find the executable path for a command
- * Returns allocated string or NULL if not found
- */
-char	*find_command_path(char *command, t_envp *env)
+char	*ft_find_command_path(char *command, t_envp *env)
 {
 	char	*path_env;
 	char	**paths;
@@ -92,6 +88,6 @@ char	*find_command_path(char *command, t_envp *env)
 	if (!paths)
 		return (NULL);
 	result = search_in_path(paths, command);
-	free_array(paths);
+	ft_free_array(paths);
 	return (result);
 }

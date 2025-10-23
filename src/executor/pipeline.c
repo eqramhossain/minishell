@@ -5,16 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 20:30:00 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 20:30:00 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/23 11:28:58 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:29:00 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-/**
- * Setup pipe redirection for child in pipeline
- */
+static int	count_commands(t_cmd *cmd)
+{
+	int		count;
+	t_cmd	*current;
+
+	count = 0;
+	current = cmd;
+	while (current)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
+
 static void	setup_pipe_redirection(int prev_pipe, int *curr_pipe, int is_last)
 {
 	if (prev_pipe != -1)
@@ -30,22 +42,19 @@ static void	setup_pipe_redirection(int prev_pipe, int *curr_pipe, int is_last)
 	}
 }
 
-/**
- * Execute one command in the pipeline
- */
 static void	execute_pipeline_child(t_ms_data *ms_data, t_cmd *cmd,
-				int prev_pipe, int *curr_pipe, int is_last)
+		int prev_pipe, int *curr_pipe, int is_last)
 {
 	char	*path;
 	char	**env_array;
 
-	setup_child_signals();
+	ft_setup_child_signals();
 	setup_pipe_redirection(prev_pipe, curr_pipe, is_last);
-	if (apply_redirections(cmd->redir) == ERROR)
+	if (ft_apply_redirections(cmd->redir) == ERROR)
 		exit(1);
 	if (ft_is_builtin(cmd->argv[0]) == SUCCESS)
-		exit(execute_builtin(ms_data, cmd->argv));
-	path = find_command_path(cmd->argv[0], ms_data->envp);
+		exit(ft_execute_builtin(ms_data, cmd->argv));
+	path = ft_find_command_path(cmd->argv[0], ms_data->envp);
 	if (!path)
 	{
 		ft_putstr_fd("minishell: ", STDERR);
@@ -53,18 +62,15 @@ static void	execute_pipeline_child(t_ms_data *ms_data, t_cmd *cmd,
 		ft_putendl_fd(": command not found", STDERR);
 		exit(127);
 	}
-	env_array = envp_to_array(ms_data->envp);
+	env_array = ft_envp_to_array(ms_data->envp);
 	execve(path, cmd->argv, env_array);
 	ft_putstr_fd("minishell: cannot execute: ", STDERR);
 	ft_putendl_fd(cmd->argv[0], STDERR);
 	exit(126);
 }
 
-/**
- * Fork and setup one command in pipeline
- */
 static pid_t	fork_pipeline_command(t_ms_data *ms_data, t_cmd *cmd,
-					int *prev_pipe, int curr_pipe[2], int is_last)
+		int *prev_pipe, int curr_pipe[2], int is_last)
 {
 	pid_t	pid;
 
@@ -112,10 +118,7 @@ static int	wait_pipeline(pid_t *pids, int count)
 	return (exit_status);
 }
 
-/**
- * Execute pipeline (multiple commands with pipes)
- */
-int	execute_pipeline(t_ms_data *ms_data, t_cmd *cmd_list)
+int	ft_execute_pipeline(t_ms_data *ms_data, t_cmd *cmd_list)
 {
 	pid_t	*pids;
 	int		prev_pipe;
@@ -139,8 +142,8 @@ int	execute_pipeline(t_ms_data *ms_data, t_cmd *cmd_list)
 			free(pids);
 			return (ERROR);
 		}
-		pids[i] = fork_pipeline_command(ms_data, current, &prev_pipe,
-				curr_pipe, current->next == NULL);
+		pids[i] = fork_pipeline_command(ms_data, current, &prev_pipe, curr_pipe,
+				current->next == NULL);
 		if (pids[i] < 0)
 		{
 			free(pids);

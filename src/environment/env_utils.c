@@ -5,16 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 20:30:00 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 20:30:00 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/23 11:27:57 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:27:59 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "environment.h"
 
-/**
- * Count environment variables
- */
 static int	count_env_vars(t_envp *env)
 {
 	int		count;
@@ -30,9 +27,6 @@ static int	count_env_vars(t_envp *env)
 	return (count);
 }
 
-/**
- * Create "KEY=VALUE" string from environment node
- */
 static char	*create_env_string(t_envp *node)
 {
 	char	*temp;
@@ -46,10 +40,7 @@ static char	*create_env_string(t_envp *node)
 	return (result);
 }
 
-/**
- * Convert environment linked list to array for execve
- */
-char	**envp_to_array(t_envp *env)
+char	**ft_envp_to_array(t_envp *env)
 {
 	char	**array;
 	t_envp	*current;
@@ -67,7 +58,7 @@ char	**envp_to_array(t_envp *env)
 		array[i] = create_env_string(current);
 		if (!array[i])
 		{
-			free_array(array);
+			ft_free_array(array);
 			return (NULL);
 		}
 		current = current->next;
@@ -77,10 +68,7 @@ char	**envp_to_array(t_envp *env)
 	return (array);
 }
 
-/**
- * Free string array
- */
-void	free_array(char **array)
+void	ft_free_array(char **array)
 {
 	int	i;
 

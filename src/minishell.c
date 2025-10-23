@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 23:06:31 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 21:01:58 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/23 11:29:56 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:29:59 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ static void	ft_main_loop(t_ms_data *data)
 			data->tokens = ft_tokenize(data->input);
 			if (data->tokens != NULL)
 			{
-				ft_print_tokens(data->tokens);
+				// ft_print_tokens(data->tokens);
 				// Tokenization successful - proceed with parsing
 				data->parser = ft_parser(data->tokens);
 				if (data->parser != NULL)
 				{
-					ft_print_parser(data->parser);
+					// ft_print_parser(data->parser);
+					ft_executor(data);
 					// TODO: Expand environment variables
 					// ft_expand_variables(data);
 					// TODO: Execute the commands

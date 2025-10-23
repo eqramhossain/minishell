@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 23:05:56 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 22:01:27 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/23 11:30:34 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:30:37 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "builtins.h"
 
-# include "environment.h"
-# include "executor.h"
-# include "parser.h"
-# include "signals.h"
-# include "structures_def.h"
-# include "syntax.h"
-# include "tokenizer.h"
-# include "utils.h"
+// TODO: Implement this properly with exit code handling!
 
-#endif
+int	ft_exit(char **args, t_ms_data *ms_data)
+{
+	int	exit_code;
+
+	exit_code = 0;
+	ft_putendl_fd("exit", STDOUT);
+	if (args[1])
+	{
+		exit_code = ft_atoi(args[1]);
+	}
+	else
+	{
+		exit_code = ms_data->exit_status;
+	}
+	exit(exit_code);
+	return (0);
+}

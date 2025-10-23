@@ -5,18 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 21:39:12 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 21:40:00 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/23 11:29:43 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:29:45 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-/**
- * Count how many commands are in the pipeline
- * Example: "ls | grep a | wc" has 3 commands
- */
-static int	count_commands(t_cmd *cmd)
+static int	ft_count_commands(t_cmd *cmd)
 {
 	int		count;
 	t_cmd	*current;
@@ -31,10 +27,6 @@ static int	count_commands(t_cmd *cmd)
 	return (count);
 }
 
-/**
- * Main executor function
- * This is where execution starts!
- */
 int	ft_executor(t_ms_data *ms_data)
 {
 	t_cmd	*cmd;
@@ -44,11 +36,11 @@ int	ft_executor(t_ms_data *ms_data)
 	if (!ms_data || !ms_data->parser || !ms_data->parser->cmds)
 		return (ERROR);
 	cmd = ms_data->parser->cmds;
-	cmd_count = count_commands(cmd);
+	cmd_count = ft_count_commands(cmd);
 	if (cmd_count == 1)
-		exit_status = execute_single_command(ms_data, cmd);
+		exit_status = ft_execute_single_command(ms_data, cmd);
 	else
-		exit_status = execute_pipeline(ms_data, cmd);
+		exit_status = ft_execute_pipeline(ms_data, cmd);
 	ms_data->exit_status = exit_status;
 	return (exit_status);
 }

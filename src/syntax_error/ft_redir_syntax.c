@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redir_syntax.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 14:33:27 by gmarquis          #+#    #+#             */
-/*   Updated: 2025/10/18 15:18:31 by ekram            ###   ########.fr       */
+/*   Created: 2025/10/23 11:40:16 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:40:18 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 /*
 ** Handles input redirection: '<' and '<<' (heredoc)
-** 
+**
 ** Error cases:
 ** - Consecutive redirections: "< <", "< <<", etc.
 ** - Redirection at end of line (no filename)
-** 
+**
 ** Returns: 1 if error detected, 0 if valid
 */
 
@@ -49,11 +49,11 @@ static int	st_redir_in(t_syntax **syntax)
 
 /*
 ** Handles output redirection: '>' and '>>' (append)
-** 
+**
 ** Error cases:
 ** - Consecutive redirections: "> >", "> >>", etc.
 ** - Redirection at end of line (no filename)
-** 
+**
 ** Returns: 1 if error detected, 0 if valid
 */
 static int	st_redir_out(t_syntax **syntax)
@@ -84,7 +84,7 @@ static int	st_redir_out(t_syntax **syntax)
 /*
 ** Main redirection syntax checker
 ** Called when we encounter '<' or '>' outside quotes
-** 
+**
 ** Returns: 1 if error detected, 0 if valid
 */
 int	ft_redir_syntax(t_syntax **syntax)

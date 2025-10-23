@@ -6,7 +6,7 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 09:31:00 by ehossain          #+#    #+#              #
-#    Updated: 2025/10/22 21:56:51 by ehossain         ###   ########.fr        #
+#    Updated: 2025/10/23 11:35:45 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,21 +37,24 @@ SRC_PARSER = ./src/parser/parser.c \
 			 ./src/parser/parse_redirection.c
 
 SRC_ENVIRONMENT = ./src/environment/get_environment.c \
-				  ./src/environment/ft_free_t_envp.c
+				  ./src/environment/ft_free_t_envp.c \
+				  ./src/environment/env_utils.c \
 
 SRC_BUILTINS = ./src/builtins/pwd_builtin.c \
 			   ./src/builtins/env_builtin.c \
-			   ./src/builtins/echo_builtin.c 
+			   ./src/builtins/echo_builtin.c \
+			   ./src/builtins/cd_builtin.c \
+			   ./src/builtins/export_builtin.c \
+			   ./src/builtins/unset_builtin.c \
+			   ./src/builtins/exit_builtin.c 
 
 SRC_EXECUTOR = src/executor/executor.c \
+			   src/executor/executor_builtins.c \
 			   src/executor/single_command.c \
 			   src/executor/external_command.c \
 			   src/executor/pipeline.c \
 			   src/executor/redirections.c \
 			   src/executor/path_finder.c \
-			   src/executor/env_utils.c \
-			   src/executor/builtin_executor.c \
-			   src/executor/signal_setup.c
 
 SRC_UTILS = ./src/utils/ft_prompt.c \
 			./src/utils/ft_free.c \
@@ -68,6 +71,7 @@ ALL_SRC = $(SRC_MAIN) \
 		  $(SRC_PARSER) \
 		  $(SRC_ENVIRONMENT) \
 		  $(SRC_BUILTINS) \
+		  $(SRC_EXECUTOR) \
 		  $(SRC_UTILS) \
 
 NAME = minishell

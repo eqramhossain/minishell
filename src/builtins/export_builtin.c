@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_setup.c                                     :+:      :+:    :+:   */
+/*   export_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 20:30:00 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 20:30:00 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/23 11:30:41 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:30:43 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "builtins.h"
 
-/**
- * Setup default signal handlers for child processes
- * Children should handle signals normally (not like the shell)
- */
-void	setup_child_signals(void)
+// export - Export environment variable
+// TODO: Implement this properly!
+
+int	ft_export(char **args, t_ms_data *ms_data)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	(void)args;
+	(void)ms_data;
+	ft_putendl_fd("export: not yet implemented", STDERR);
+	return (0);
 }

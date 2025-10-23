@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_syntax.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/18 15:35:00 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/18 15:18:31 by ekram            ###   ########.fr       */
+/*   Created: 2025/10/23 11:40:02 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:40:03 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 /*
 ** Handles pipe '|' syntax checking (MANDATORY ONLY)
-** 
+**
 ** Error cases we detect:
 ** 1. Pipe at the beginning: "| echo hello"
 ** 2. Pipe at the end: "echo hello |"
 ** 3. Double pipe: "echo hello || world" (this is logical OR in bonus)
 ** 4. Pipe after redirection without filename: "cat < |"
 ** 5. Consecutive pipes: "echo | | cat"
-** 
+**
 ** How it works:
 ** - When we see a pipe, we set pipe_flag = 1
 ** - We check if there's another pipe right after (error: ||)
 ** - We check if we're at the end of line (error: | at end)
 ** - We check if there's an active redirection flag (error: no filename)
 ** - If pipe is at position 0, it's an error (| at start)
-** 
+**
 ** Returns: 1 if error detected, 0 if valid
 */
 int	ft_pipe_syntax(t_syntax **syntax)

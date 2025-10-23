@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 20:30:00 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 20:30:00 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/23 11:28:18 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/23 11:28:21 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,7 @@ static int	handle_heredoc(char *delimiter)
 	return (SUCCESS);
 }
 
-/**
- * Apply all redirections for a command
- */
-int	apply_redirections(t_redir *redir_list)
+int	ft_apply_redirections(t_redir *redir_list)
 {
 	t_redir	*current;
 
