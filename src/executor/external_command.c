@@ -6,11 +6,12 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:29:09 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:29:11 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:32:39 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+#include "minishell.h"
 
 static void	ft_child_execute(t_ms_data *ms_data, t_cmd *cmd)
 {
@@ -26,6 +27,7 @@ static void	ft_child_execute(t_ms_data *ms_data, t_cmd *cmd)
 		ft_putstr_fd("minishell: ", STDERR);
 		ft_putstr_fd(cmd->argv[0], STDERR);
 		ft_putendl_fd(": command not found", STDERR);
+		ft_free_ms_data(ms_data);
 		exit(127);
 	}
 	env_array = ft_envp_to_array(ms_data->envp);
@@ -37,6 +39,7 @@ static void	ft_child_execute(t_ms_data *ms_data, t_cmd *cmd)
 	ft_putendl_fd(": cannot execute", STDERR);
 	free(path);
 	ft_free_array(env_array);
+	ft_free_ms_data(ms_data);
 	exit(126);
 }
 

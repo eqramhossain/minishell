@@ -6,11 +6,12 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:28:58 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:29:00 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:37:34 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+#include "minishell.h"
 
 static int	count_commands(t_cmd *cmd)
 {
@@ -63,9 +64,12 @@ static void	execute_pipeline_child(t_ms_data *ms_data, t_cmd *cmd,
 		exit(127);
 	}
 	env_array = ft_envp_to_array(ms_data->envp);
+	if (!env_array)
+		free(path);
 	execve(path, cmd->argv, env_array);
 	ft_putstr_fd("minishell: cannot execute: ", STDERR);
 	ft_putendl_fd(cmd->argv[0], STDERR);
+	ft_free_ms_data(ms_data);
 	exit(126);
 }
 
@@ -115,6 +119,7 @@ static int	wait_pipeline(pid_t *pids, int count)
 		}
 		i++;
 	}
+	free(pids);
 	return (exit_status);
 }
 

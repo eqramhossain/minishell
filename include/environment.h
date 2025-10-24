@@ -6,12 +6,12 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 11:59:58 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:24:34 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/24 17:47:12 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVP_H
-# define ENVP_H
+#ifndef ENVIRONMENT_H
+# define ENVIRONMENT_H
 
 # include "structures_def.h"
 
