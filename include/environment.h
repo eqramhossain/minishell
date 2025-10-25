@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 11:59:58 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 15:25:47 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:17:46 by ekram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ char	*ft_expand_string(char *str, t_envp *env, int exit_status);
 char	*ft_get_env_value(char *var_name, t_envp *env);
 int		ft_is_var_char(char c);
 int		ft_get_var_name_len(char *str);
-
+int		ft_should_expand(char *str, int pos);
+char	*ft_append_to_result(char *result, char *to_add);
+char	*ft_extract_var_name(char *str, int *i);
+char	*ft_get_variable_value(char *str, int *i, t_envp *env, int exit_status);
 char	**ft_filter_empty_args(char **argv);
 
 #endif

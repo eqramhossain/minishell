@@ -6,11 +6,18 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:23:51 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 15:23:53 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:20:09 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
+
+static void	ft_init_var_i_j(int *i, int *j)
+{
+	*i = 0;
+	*j = 0;
+	return ;
+}
 
 static int	count_non_empty(char **arr)
 {
@@ -41,18 +48,14 @@ char	**ft_filter_empty_args(char **argv)
 	result = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!result)
 		return (NULL);
-	i = 0;
-	j = 0;
+	ft_init_var_i_j(&i, &j);
 	while (argv[i])
 	{
 		if (argv[i][0] != '\0')
 		{
 			result[j] = ft_strdup(argv[i]);
 			if (!result[j])
-			{
-				ft_free_array(result);
-				return (NULL);
-			}
+				return (ft_free_array(result), NULL);
 			j++;
 		}
 		i++;

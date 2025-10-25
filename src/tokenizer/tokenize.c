@@ -6,7 +6,7 @@
 /*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 23:22:00 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/24 23:59:41 by ekram            ###   ########.fr       */
+/*   Updated: 2025/10/25 17:40:33 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ t_token	*ft_tokenize(char *input)
 		else
 			tmp = ft_handle_word(&tokenizer);
 		if (!tmp)
-		{
-			ft_free_tokens(tokens);
-			return (NULL);
-		}
+			return (ft_free_tokens(tokens), NULL);
 		ft_add_token(&tokens, tmp);
 	}
 	return (tokens);

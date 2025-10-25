@@ -6,24 +6,47 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:03:44 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 14:57:55 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:24:08 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "quote.h"
 
-char	*ft_remove_quotes(char *str)
+static int	ft_calculate_unquoted_len(char *str)
 {
-	char	*result;
+	int		len;
+	int		i;
+	char	in_quote;
+
+	len = 0;
+	i = 0;
+	in_quote = 0;
+	while (str[i])
+	{
+		if (!in_quote && (str[i] == '\'' || str[i] == '"'))
+		{
+			in_quote = str[i];
+			i++;
+			continue ;
+		}
+		else if (in_quote && str[i] == in_quote)
+		{
+			in_quote = 0;
+			i++;
+			continue ;
+		}
+		len++;
+		i++;
+	}
+	return (len);
+}
+
+static void	ft_copy_without_quotes(char *str, char *result)
+{
 	int		i;
 	int		j;
 	char	in_quote;
 
-	if (!str)
-		return (NULL);
-	result = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
-	if (!result)
-		return (NULL);
 	i = 0;
 	j = 0;
 	in_quote = 0;
@@ -31,23 +54,37 @@ char	*ft_remove_quotes(char *str)
 	{
 		if (!in_quote && (str[i] == '\'' || str[i] == '"'))
 		{
-			in_quote = str[i]; // Open a quote context
+			in_quote = str[i];
 			i++;
-			continue ; // Skip the opening quote character
+			continue ;
 		}
 		else if (in_quote && str[i] == in_quote)
 		{
-			in_quote = 0; // Close the quote context
+			in_quote = 0;
 			i++;
-			continue ; // Skip the closing quote character
+			continue ;
 		}
-		// Copy everything else (including quotes that are inside other quotes)
 		result[j++] = str[i];
 		i++;
 	}
 	result[j] = '\0';
+}
+
+char	*ft_remove_quotes(char *str)
+{
+	char	*result;
+	int		len;
+
+	if (!str)
+		return (NULL);
+	len = ft_calculate_unquoted_len(str);
+	result = (char *)malloc(sizeof(char) * (len + 1));
+	if (!result)
+		return (NULL);
+	ft_copy_without_quotes(str, result);
 	return (result);
 }
+
 char	**ft_remove_quotes_array(char **arr)
 {
 	char	**result;
@@ -67,10 +104,7 @@ char	**ft_remove_quotes_array(char **arr)
 	{
 		result[i] = ft_remove_quotes(arr[i]);
 		if (!result[i])
-		{
-			ft_free_array(result);
-			return (NULL);
-		}
+			return (ft_free_array(result), NULL);
 		i++;
 	}
 	result[i] = NULL;

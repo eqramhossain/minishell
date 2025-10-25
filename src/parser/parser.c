@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:31:39 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/24 17:39:04 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:03:56 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ t_parser	*ft_parser(t_token *tokens)
 	{
 		cmd = ft_parse_command(&tokens);
 		if (!cmd)
-		{
-			ft_free_parser(parser);
-			return (NULL);
-		}
+			return (ft_free_parser(parser), NULL);
 		ft_add_command(&parser->cmds, cmd);
 		if (tokens && tokens->type == TOKEN_PIPE)
 			tokens = tokens->next;
@@ -107,37 +104,37 @@ void	ft_free_redir(t_redir *redir)
 	}
 }
 
-void	ft_print_parser(t_parser *parser)
-{
-	t_cmd	*cmd;
-	t_redir	*redir;
-	int		cmd_num;
-	int		i;
-
-	if (!parser)
-		return ;
-	cmd_num = 0;
-	cmd = parser->cmds;
-	while (cmd)
-	{
-		ft_printf("Command %d:\n", cmd_num++);
-		if (cmd->argv)
-		{
-			ft_printf("  Args: ");
-			i = 0;
-			while (cmd->argv[i])
-			{
-				ft_printf("[%s] ", cmd->argv[i]);
-				i++;
-			}
-			ft_printf("\n");
-		}
-		redir = cmd->redir;
-		while (redir)
-		{
-			ft_printf("  Redir: type=%d file=%s\n", redir->type, redir->file);
-			redir = redir->next;
-		}
-		cmd = cmd->next;
-	}
-}
+// void	ft_print_parser(t_parser *parser)
+// {
+// 	t_cmd	*cmd;
+// 	t_redir	*redir;
+// 	int		cmd_num;
+// 	int		i;
+//
+// 	if (!parser)
+// 		return ;
+// 	cmd_num = 0;
+// 	cmd = parser->cmds;
+// 	while (cmd)
+// 	{
+// 		ft_printf("Command %d:\n", cmd_num++);
+// 		if (cmd->argv)
+// 		{
+// 			ft_printf("  Args: ");
+// 			i = 0;
+// 			while (cmd->argv[i])
+// 			{
+// 				ft_printf("[%s] ", cmd->argv[i]);
+// 				i++;
+// 			}
+// 			ft_printf("\n");
+// 		}
+// 		redir = cmd->redir;
+// 		while (redir)
+// 		{
+// 			ft_printf("  Redir: type=%d file=%s\n", redir->type, redir->file);
+// 			redir = redir->next;
+// 		}
+// 		cmd = cmd->next;
+// 	}
+// }

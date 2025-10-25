@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures_def.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:10:35 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 16:46:06 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:56:24 by ekram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,12 @@ typedef struct s_envp
 	char			*value;
 	struct s_envp	*next;
 }					t_envp;
+
+typedef struct s_expansion_data
+{
+	t_envp			*env;
+	int				exit_status;
+}					t_expansion_data;
 
 typedef struct s_redir
 {

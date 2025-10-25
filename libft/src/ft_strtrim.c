@@ -6,22 +6,11 @@
 /*   By: ehossain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 10:33:45 by ehossain          #+#    #+#             */
-/*   Updated: 2025/08/05 15:37:13 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:14:01 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// int	main(void)
-// {
-// 	char	set[] = "PATH=";
-// 	char	str[] = "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/ekram/.local/bin:/home/ekram/.local/bin";
-// 	char	*ptr;
-//
-// 	ptr = ft_strtrim(str, set);
-// 	printf("%s\n", ptr);
-// 	return (0);
-// }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

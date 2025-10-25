@@ -3,92 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:28:58 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/24 23:48:11 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 19:19:22 by ekram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include "minishell.h"
 
-static int	count_commands(t_cmd *cmd)
+static void	ft_close_pipes(t_pipe_data *p)
 {
-	int		count;
-	t_cmd	*current;
-
-	count = 0;
-	current = cmd;
-	while (current)
+	if (p->prev_pipe != -1)
+		close(p->prev_pipe);
+	if (!p->is_last)
 	{
-		count++;
-		current = current->next;
-	}
-	return (count);
-}
-
-static void	setup_pipe_redirection(int prev_pipe, int *curr_pipe, int is_last)
-{
-	if (prev_pipe != -1)
-	{
-		dup2(prev_pipe, STDIN);
-		close(prev_pipe);
-	}
-	if (!is_last)
-	{
-		dup2(curr_pipe[1], STDOUT);
-		close(curr_pipe[0]);
-		close(curr_pipe[1]);
+		close(p->curr_pipe[1]);
+		p->prev_pipe = p->curr_pipe[0];
 	}
 }
 
-static void	execute_pipeline_child(t_ms_data *ms_data, t_cmd *cmd,
-		int prev_pipe, int *curr_pipe, int is_last)
-{
-	char	*path;
-	char	**env_array;
-
-	ft_setup_child_signals();
-	setup_pipe_redirection(prev_pipe, curr_pipe, is_last);
-	if (ft_apply_redirections(cmd->redir) == ERROR)
-	{
-		ft_free_ms_data(ms_data);
-		exit(1);
-	}
-	if (ft_is_builtin(cmd->argv[0]) == SUCCESS)
-	{
-		ms_data->exit_status = ft_execute_builtin(ms_data, cmd->argv);
-		ft_free_ms_data(ms_data);
-		exit(ms_data->exit_status);
-	}
-	path = ft_find_command_path(cmd->argv[0], ms_data->envp);
-	if (!path)
-	{
-		ft_putstr_fd("minishell: ", STDERR);
-		ft_putstr_fd(cmd->argv[0], STDERR);
-		ft_putendl_fd(": command not found", STDERR);
-		ft_free_ms_data(ms_data);
-		exit(127);
-	}
-	env_array = ft_envp_to_array(ms_data->envp);
-	if (!env_array)
-	{
-		free(path);
-		ft_free_ms_data(ms_data);
-		exit(1);
-	}
-	execve(path, cmd->argv, env_array);
-	ft_putstr_fd("minishell: cannot execute: ", STDERR);
-	ft_putendl_fd(cmd->argv[0], STDERR);
-	free(path);
-	ft_free_array(env_array);
-	ft_free_ms_data(ms_data);
-	exit(126);
-}
-
-static pid_t	fork_pipeline_command(t_ms_data *ms_data, t_cmd *cmd,
-		int *prev_pipe, int curr_pipe[2], int is_last)
+static pid_t	ft_fork_pipe_cmd(t_ms_data *ms_data, t_cmd *cmd, t_pipe_data *p)
 {
 	pid_t	pid;
 
@@ -99,77 +35,53 @@ static pid_t	fork_pipeline_command(t_ms_data *ms_data, t_cmd *cmd,
 		return (-1);
 	}
 	if (pid == 0)
-		execute_pipeline_child(ms_data, cmd, *prev_pipe, curr_pipe, is_last);
-	if (*prev_pipe != -1)
-		close(*prev_pipe);
-	if (!is_last)
-	{
-		close(curr_pipe[1]);
-		*prev_pipe = curr_pipe[0];
-	}
+		ft_execute_pipe_child(ms_data, cmd, p);
+	ft_close_pipes(p);
 	return (pid);
 }
 
-/**
- * Wait for all pipeline children and get final exit status
- */
-static int	wait_pipeline(pid_t *pids, int count)
+static int	ft_pipe_loop(t_ms_data *ms_data, t_cmd *cmd_list, t_loop_data *l)
 {
-	int	i;
-	int	status;
-	int	exit_status;
+	t_pipe_data	p;
 
-	i = 0;
-	exit_status = 0;
-	while (i < count)
+	l->current = cmd_list;
+	l->i = 0;
+	while (l->current)
 	{
-		waitpid(pids[i], &status, 0);
-		if (i == count - 1)
+		p.prev_pipe = l->prev_pipe;
+		p.is_last = (l->current->next == NULL);
+		if (l->current->next && pipe(p.curr_pipe) < 0)
 		{
-			if (WIFEXITED(status))
-				exit_status = WEXITSTATUS(status);
-			else if (WIFSIGNALED(status))
-				exit_status = 128 + WTERMSIG(status);
+			ft_putendl_fd("minishell: pipe failed", STDERR);
+			if (l->prev_pipe != -1)
+				close(l->prev_pipe);
+			free(l->pids);
+			return (ERROR);
 		}
-		i++;
+		l->pids[l->i] = ft_fork_pipe_cmd(ms_data, l->current, &p);
+		if (l->pids[l->i] < 0)
+			return (ERROR);
+		l->prev_pipe = p.prev_pipe;
+		l->current = l->current->next;
+		l->i++;
 	}
-	free(pids);
-	return (exit_status);
+	return (SUCCESS);
 }
 
 int	ft_execute_pipeline(t_ms_data *ms_data, t_cmd *cmd_list)
 {
-	pid_t	*pids;
-	int		prev_pipe;
-	int		curr_pipe[2];
-	int		i;
-	t_cmd	*current;
-	int		count;
+	t_loop_data	l;
+	int			count;
 
-	count = count_commands(cmd_list);
-	pids = malloc(sizeof(pid_t) * count);
-	if (!pids)
+	count = ft_count_commands(cmd_list);
+	l.pids = malloc(sizeof(pid_t) * count);
+	if (!l.pids)
 		return (ERROR);
-	prev_pipe = -1;
-	current = cmd_list;
-	i = 0;
-	while (current)
+	l.prev_pipe = -1;
+	if (ft_pipe_loop(ms_data, cmd_list, &l) == ERROR)
 	{
-		if (current->next && pipe(curr_pipe) < 0)
-		{
-			ft_putendl_fd("minishell: pipe failed", STDERR);
-			free(pids);
-			return (ERROR);
-		}
-		pids[i] = fork_pipeline_command(ms_data, current, &prev_pipe, curr_pipe,
-				current->next == NULL);
-		if (pids[i] < 0)
-		{
-			free(pids);
-			return (ERROR);
-		}
-		current = current->next;
-		i++;
+		free(l.pids);
+		return (ERROR);
 	}
-	return (wait_pipeline(pids, count));
+	return (ft_wait_pipeline(l.pids, count));
 }

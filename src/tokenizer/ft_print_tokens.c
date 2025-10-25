@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:40:36 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:40:37 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:10:23 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,28 @@
 
 static const char	*ft_token_type_to_string(t_token_type type)
 {
-	switch (type)
-	{
-	case TOKEN_WORD:
+	if (type == TOKEN_WORD)
 		return ("WORD");
-	case TOKEN_PIPE:
+	else if (type == TOKEN_PIPE)
 		return ("PIPE");
-	case TOKEN_REDIR_IN:
+	else if (type == TOKEN_REDIR_IN)
 		return ("REDIR_IN");
-	case TOKEN_REDIR_OUT:
+	else if (type == TOKEN_REDIR_OUT)
 		return ("REDIR_OUT");
-	case TOKEN_APPEND:
+	else if (type == TOKEN_APPEND)
 		return ("APPEND");
-	case TOKEN_HEREDOC:
+	else if (type == TOKEN_HEREDOC)
 		return ("HEREDOC");
-	case TOKEN_SINGLE_QUOTE:
+	else if (type == TOKEN_SINGLE_QUOTE)
 		return ("SINGLE_QUOTE");
-	case TOKEN_DOUBLE_QUOTE:
+	else if (type == TOKEN_DOUBLE_QUOTE)
 		return ("DOUBLE_QUOTE");
-	case TOKEN_EOF:
+	else if (type == TOKEN_EOF)
 		return ("EOF");
-	case TOKEN_ERROR:
+	else if (type == TOKEN_ERROR)
 		return ("ERROR");
-	default:
+	else
 		return ("UNKNOWN");
-	}
 }
 
 void	ft_print_tokens(t_token *head)

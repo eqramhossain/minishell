@@ -6,13 +6,13 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:31:17 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:31:19 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:48:55 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
 
-static void	ft_t_envp_init(t_envp **envp);
+static void	ft_t_envp_init(t_envp **envp, int j);
 static void	ft_lstadd_t_envp(t_envp **head, t_envp *new_lst);
 static void	ft_getenv(t_envp **envp_node);
 
@@ -31,27 +31,24 @@ t_envp	*ft_get_envp(char **envp)
 			j++;
 		if (i == 0)
 		{
-			ft_t_envp_init(&node_envp);
-			node_envp->key = ft_calloc(sizeof(char), j + 1);
+			ft_t_envp_init(&node_envp, j);
 			ft_strlcpy(node_envp->key, envp[i], j + 1);
 		}
 		else if (i > 0)
 		{
-			ft_t_envp_init(&current_node);
-			current_node->key = ft_calloc(sizeof(char), j + 1);
+			ft_t_envp_init(&current_node, j);
 			ft_strlcpy(current_node->key, envp[i], j + 1);
 			ft_lstadd_t_envp(&node_envp, current_node);
 		}
 		i++;
 	}
-	ft_getenv(&node_envp);
-	return (node_envp);
+	return (ft_getenv(&node_envp), node_envp);
 }
 
-static void	ft_t_envp_init(t_envp **envp)
+static void	ft_t_envp_init(t_envp **envp, int j)
 {
 	*envp = ft_calloc(sizeof(t_envp), 1);
-	(*envp)->key = NULL;
+	(*envp)->key = ft_calloc(sizeof(char), j + 1);
 	(*envp)->value = NULL;
 	(*envp)->next = NULL;
 }

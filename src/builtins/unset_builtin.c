@@ -6,13 +6,13 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:30:58 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 12:56:21 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 19:33:05 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static int	is_valid_identifier(char *str)
+static int	is_valid_identifier_unset(char *str)
 {
 	int	i;
 
@@ -74,7 +74,7 @@ int	ft_unset(char **args, t_ms_data *ms_data)
 	i = 1;
 	while (args[i])
 	{
-		if (!is_valid_identifier(args[i]))
+		if (!is_valid_identifier_unset(args[i]))
 		{
 			print_unset_error(args[i]);
 			status = ERROR;

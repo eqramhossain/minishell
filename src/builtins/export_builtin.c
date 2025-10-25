@@ -6,55 +6,24 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:30:41 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 15:28:49 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 19:26:25 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static int	is_valid_identifier(char *str)
-{
-	int	i;
-
-	if (!str || !str[0])
-		return (0);
-	if (!ft_isalpha(str[0]) && str[0] != '_')
-		return (0);
-	i = 1;
-	while (str[i] && str[i] != '=')
-	{
-		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-static void	print_export_error(char *arg)
-{
-	ft_putstr_fd("minishell: export: `", STDERR);
-	ft_putstr_fd(arg, STDERR);
-	ft_putendl_fd("': not a valid identifier", STDERR);
-}
-
-static void	print_sorted_env(t_envp *env)
+static t_envp	*find_env_var(t_envp *env, char *key)
 {
 	t_envp	*current;
 
 	current = env;
 	while (current)
 	{
-		ft_putstr_fd("declare -x ", STDOUT);
-		ft_putstr_fd(current->key, STDOUT);
-		if (current->value)
-		{
-			ft_putstr_fd("=\"", STDOUT);
-			ft_putstr_fd(current->value, STDOUT);
-			ft_putstr_fd("\"", STDOUT);
-		}
-		ft_putstr_fd("\n", STDOUT);
+		if (ft_strncmp(current->key, key, ft_strlen(key) + 1) == 0)
+			return (current);
 		current = current->next;
 	}
+	return (NULL);
 }
 
 static void	update_or_add_env(t_envp **env, char *key, char *value)
@@ -62,34 +31,29 @@ static void	update_or_add_env(t_envp **env, char *key, char *value)
 	t_envp	*current;
 	t_envp	*new_node;
 
-	current = *env;
-	while (current)
+	current = find_env_var(*env, key);
+	if (current)
 	{
-		if (ft_strncmp(current->key, key, ft_strlen(key) + 1) == 0)
-		{
-			if (value)
-			{
-				if (current->value)
-					free(current->value);
-				current->value = ft_strdup(value);
-			}
-			return ;
-		}
-		if (!current->next)
-			break ;
-		current = current->next;
+		if (value && current->value)
+			free(current->value);
+		if (value)
+			current->value = ft_strdup(value);
+		return ;
 	}
 	new_node = malloc(sizeof(t_envp));
 	new_node->key = ft_strdup(key);
-	new_node->value = value ? ft_strdup(value) : NULL;
+	if (value)
+		new_node->value = ft_strdup(value);
+	else
+		new_node->value = NULL;
 	new_node->next = NULL;
-	if (current)
-		current->next = new_node;
+	if (*env)
+		ft_envadd_back(env, new_node);
 	else
 		*env = new_node;
 }
 
-static int	export_variable(char *arg, t_ms_data *ms_data)
+static int	process_export_arg(char *arg, t_ms_data *ms_data)
 {
 	char	*equal_sign;
 	char	*key;
@@ -137,7 +101,7 @@ int	ft_export(char **args, t_ms_data *ms_data)
 	i = 1;
 	while (args[i])
 	{
-		if (export_variable(args[i], ms_data) == ERROR)
+		if (process_export_arg(args[i], ms_data) == ERROR)
 			status = ERROR;
 		i++;
 	}

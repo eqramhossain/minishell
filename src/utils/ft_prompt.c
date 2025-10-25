@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:33:57 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/18 15:30:14 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:12:42 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,6 @@
 
 static char	*ft_first_part(void);
 static char	*ft_second_part(void);
-
-void	ft_display_banner(void)
-{
-	printf("\n");
-	printf(GREEN " ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗ \n" RESET);
-	printf(GREEN " ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║ \n" RESET);
-	printf(GREEN " ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║ \n" RESET);
-	printf(GREEN " ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║ \n" RESET);
-	printf(GREEN " ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗\n" RESET);
-	printf(GREEN " ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n" RESET);
-	printf("\n");
-}
 
 char	*ft_prompt(void)
 {

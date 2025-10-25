@@ -6,7 +6,7 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 09:31:00 by ehossain          #+#    #+#              #
-#    Updated: 2025/10/25 15:33:26 by ehossain         ###   ########.fr        #
+#    Updated: 2025/10/25 19:46:31 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,14 +34,17 @@ SRC_TOKENS =./src/tokenizer/ft_handle_operator.c \
 
 SRC_PARSER = ./src/parser/parser.c \
 			 ./src/parser/parser_command.c \
+			 ./src/parser/parser_command_utils.c \
+			 ./src/parser/build_argv.c \
 			 ./src/parser/parse_redirection.c \
-			 ./src/parser/utils.c 
+			 ./src/parser/utils.c \
 
 SRC_ENVIRONMENT = ./src/environment/get_environment.c \
 				  ./src/environment/ft_free_t_envp.c \
 				  ./src/environment/env_utils.c \
 				  ./src/environment/expansion.c \
 				  ./src/environment/expand_string.c \
+				  ./src/environment/expand_string_utils.c \
 				  ./src/environment/expansion_utils.c \
 
 SRC_BUILTINS = ./src/builtins/pwd_builtin.c \
@@ -49,6 +52,7 @@ SRC_BUILTINS = ./src/builtins/pwd_builtin.c \
 			   ./src/builtins/echo_builtin.c \
 			   ./src/builtins/cd_builtin.c \
 			   ./src/builtins/export_builtin.c \
+			   ./src/builtins/export_builtin_utils.c \
 			   ./src/builtins/unset_builtin.c \
 			   ./src/builtins/exit_builtin.c 
 
@@ -57,6 +61,8 @@ SRC_EXECUTOR = ./src/executor/executor.c \
 			   ./src/executor/single_command.c \
 			   ./src/executor/external_command.c \
 			   ./src/executor/pipeline.c \
+			   ./src/executor/pipeline_utils.c \
+			   ./src/executor/pipeline_exec.c \
 			   ./src/executor/redirections.c \
 			   ./src/executor/path_finder.c \
 
@@ -73,6 +79,8 @@ SRC_UTILS = ./src/utils/ft_prompt.c \
 			./src/utils/ft_strcmp.c \
 			./src/utils/ft_putendl.c \
 			./src/utils/ft_edge.c \
+			./src/utils/minishell_utils.c \
+			./src/utils/minishell_utils_free.c \
 
 ALL_SRC = $(SRC_MAIN) \
 		  $(SRC_SIGNAL) \

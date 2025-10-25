@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:39:48 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:39:50 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:32:43 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ static int	st_reinit_pipe(char c)
 	return (0);
 }
 
+static int	ft_handle_special_chars(t_syntax *synt)
+{
+	if ((synt->current[synt->i] == '<' || synt->current[synt->i] == '>')
+		&& ft_redir_syntax(&synt))
+		return (1);
+	if (synt->current[synt->i] == '|' && ft_pipe_syntax(&synt))
+		return (1);
+	return (0);
+}
+
 int	ft_check_reinit(t_syntax **syntax)
 {
 	t_syntax	*synt;
@@ -42,17 +52,6 @@ int	ft_check_reinit(t_syntax **syntax)
 	if (st_reinit_pipe(synt->current[synt->i]))
 		synt->pipe_flag = 0;
 	if (!synt->dq_trigger && !synt->sq_trigger)
-	{
-		if (synt->current[synt->i] == '<' || synt->current[synt->i] == '>')
-		{
-			if (ft_redir_syntax(&synt))
-				return (1);
-		}
-		if (synt->current[synt->i] == '|')
-		{
-			if (ft_pipe_syntax(&synt))
-				return (1);
-		}
-	}
+		return (ft_handle_special_chars(synt));
 	return (0);
 }
