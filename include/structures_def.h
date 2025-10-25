@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:10:35 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 20:50:40 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 16:46:06 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 # define TAB 9
 # define BACKSLASH 92
 # define SEMICOLON 59
-# define DOUBLE_QUOTE 34 // "..."
-# define SINGLE_QUOTE 39 // '...'
-# define REDIR_IN 60     // <
-# define REDIR_OUT 62    // >
-# define PIPE 124        // |
+# define DOUBLE_QUOTE 34
+# define SINGLE_QUOTE 39
+# define REDIR_IN 60
+# define REDIR_OUT 62
+# define PIPE 124
 
 # define PROMPT "➜ minishell:~"
 # define RESET "\001\033[0m\002"
@@ -59,10 +59,6 @@
 # include <time.h>
 # include <unistd.h>
 
-/* ========================================================================== */
-/*                            SYNTAX STRUCTURE                                */
-/* ========================================================================== */
-
 typedef struct s_syntax
 {
 	char			*current;
@@ -78,22 +74,18 @@ typedef struct s_syntax
 	int				pipe_flag;
 }					t_syntax;
 
-/* ========================================================================== */
-/*                          TOKENIZER STRUCTURE                               */
-/* ========================================================================== */
-
 typedef enum e_token_type
 {
-	TOKEN_WORD,         // regular word
-	TOKEN_PIPE,         // |
-	TOKEN_REDIR_IN,     // <
-	TOKEN_REDIR_OUT,    // >
-	TOKEN_APPEND,       // >>
-	TOKEN_HEREDOC,      // <<
-	TOKEN_SINGLE_QUOTE, // '...'
-	TOKEN_DOUBLE_QUOTE, // "..."
-	TOKEN_EOF,          // EOF
-	TOKEN_ERROR,        // unknown char
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIR_IN,
+	TOKEN_REDIR_OUT,
+	TOKEN_APPEND,
+	TOKEN_HEREDOC,
+	TOKEN_SINGLE_QUOTE,
+	TOKEN_DOUBLE_QUOTE,
+	TOKEN_EOF,
+	TOKEN_ERROR,
 }					t_token_type;
 
 typedef struct s_token
@@ -113,20 +105,12 @@ typedef struct s_tokenizer
 	char			quote_type;
 }					t_tokenizer;
 
-/* ========================================================================== */
-/*								ENVIRONMENT STRUCTURE                         */
-/* ========================================================================== */
-
 typedef struct s_envp
 {
 	char			*key;
 	char			*value;
 	struct s_envp	*next;
 }					t_envp;
-
-/* ========================================================================== */
-/*                           PARSER STRUCTURE                                 */
-/* ========================================================================== */
 
 typedef struct s_redir
 {
@@ -152,21 +136,17 @@ typedef struct s_parser
 	struct s_parser	*next;
 }					t_parser;
 
-/* ========================================================================== */
-/*                            MINISHELL STRUCTURE                             */
-/* ========================================================================== */
-
 typedef struct s_ms_data
 {
-	int exit_status;  // Last exit status
-	int running;      // Shell running flag
-	char *prompt;     //
-	char *input;      // User input
-	char **envp_arg;  // cpy of envp
-	t_envp *envp;     // Envp list
-	t_envp *envp_cp;  // Copy
-	t_token *tokens;  // Token lists
-	t_parser *parser; // Parser list
+	int				exit_status;
+	int				running;
+	char			*prompt;
+	char			*input;
+	char			**envp_arg;
+	t_envp			*envp;
+	t_envp			*envp_cp;
+	t_token			*tokens;
+	t_parser		*parser;
 }					t_ms_data;
 
 #endif
