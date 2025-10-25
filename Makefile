@@ -6,7 +6,7 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 09:31:00 by ehossain          #+#    #+#              #
-#    Updated: 2025/10/23 11:35:45 by ehossain         ###   ########.fr        #
+#    Updated: 2025/10/24 22:28:39 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,9 @@ SRC_PARSER = ./src/parser/parser.c \
 SRC_ENVIRONMENT = ./src/environment/get_environment.c \
 				  ./src/environment/ft_free_t_envp.c \
 				  ./src/environment/env_utils.c \
+				  ./src/environment/expansion.c \
+				  ./src/environment/expand_string.c \
+				  ./src/environment/expansion_utils.c \
 
 SRC_BUILTINS = ./src/builtins/pwd_builtin.c \
 			   ./src/builtins/env_builtin.c \
@@ -70,6 +73,7 @@ ALL_SRC = $(SRC_MAIN) \
 		  $(SRC_TOKENS) \
 		  $(SRC_PARSER) \
 		  $(SRC_ENVIRONMENT) \
+		  $(SRC_EXPANSION) \
 		  $(SRC_BUILTINS) \
 		  $(SRC_EXECUTOR) \
 		  $(SRC_UTILS) \

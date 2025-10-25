@@ -6,21 +6,11 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:40:16 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:40:18 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 11:43:34 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "syntax.h"
-
-/*
-** Handles input redirection: '<' and '<<' (heredoc)
-**
-** Error cases:
-** - Consecutive redirections: "< <", "< <<", etc.
-** - Redirection at end of line (no filename)
-**
-** Returns: 1 if error detected, 0 if valid
-*/
 
 static int	st_redir_in(t_syntax **syntax)
 {
@@ -47,15 +37,6 @@ static int	st_redir_in(t_syntax **syntax)
 	return (0);
 }
 
-/*
-** Handles output redirection: '>' and '>>' (append)
-**
-** Error cases:
-** - Consecutive redirections: "> >", "> >>", etc.
-** - Redirection at end of line (no filename)
-**
-** Returns: 1 if error detected, 0 if valid
-*/
 static int	st_redir_out(t_syntax **syntax)
 {
 	t_syntax	*synt;

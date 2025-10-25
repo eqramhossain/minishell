@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   quote.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 14:34:44 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 12:31:59 by ehossain         ###   ########.fr       */
+/*   Created: 2025/10/25 13:01:29 by ehossain          #+#    #+#             */
+/*   Updated: 2025/10/25 13:01:39 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
+#ifndef QUOTE_H
+# define QUOTE_H
 
 # include "structures_def.h"
 
-void	ft_setup_signal(void);
-void	ft_setup_child_signals(void);
-void	ft_sigquit(void);
-void	ft_sigint(void);
+char	*ft_remove_quotes(char *str);
+char	**ft_remove_quotes_array(char **arr);
+
+int		ft_is_quote(char c);
+char	ft_get_quote_state(char *str, int pos);
+int		ft_find_closing_quote(char *str, int start);
+size_t	ft_count_unquoted_len(char *str);
+
+int		ft_check_quotes_closed(char *str);
+int		ft_is_inside_quotes(char *str, int pos);
+char	ft_get_quote_type(char *str, int pos);
 
 #endif

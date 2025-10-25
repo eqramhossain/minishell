@@ -6,32 +6,12 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:39:40 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:39:43 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 11:42:49 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "syntax.h"
 
-/*
-** This file handles the final error reporting after syntax checking is complete
-**
-** WHY THIS APPROACH?
-** During parsing, we detect errors and set error codes (error = 1, 2, 3, etc.)
-** At the end, we print the appropriate error message based on what we found
-**
-** Error codes (mandatory):
-** 1 = newline (redirection/pipe at end with no argument)
-** 2 = '<'  (consecutive input redirections)
-** 3 = '<<' (consecutive heredoc)
-** 4 = '>'  (consecutive output redirections)
-** 5 = '>>' (consecutive append redirections)
-** 6 = '|'  (pipe errors: at start, at end, double pipe)
-*/
-
-/*
-** Print the specific error token based on error code
-** Matches bash's error message format exactly
-*/
 static void	st_print_error_token(int error)
 {
 	if (error == 1)
@@ -48,18 +28,6 @@ static void	st_print_error_token(int error)
 		ft_putstr_fd("`|'\n", 2);
 }
 
-/*
-** Final error check and message printer
-**
-** Called after we've scanned the entire input string
-** Checks if any errors were detected during scanning:
-** - Operator/redirection errors (error > 0)
-** - Unclosed quotes (sq_trigger or dq_trigger still set to 1)
-**
-** If errors found, prints bash-style error message and returns 1
-**
-** Returns: 0 if no errors, 1 if errors detected
-*/
 int	ft_check_error_syntax(t_syntax **syntax)
 {
 	t_syntax	*synt;

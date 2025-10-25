@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:29:20 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/24 11:52:43 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/24 21:28:12 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	ft_is_builtin(char *cmd)
 	if (ft_strcmp(cmd, "export") == 0)
 		return (SUCCESS);
 	if (ft_strcmp(cmd, "unset") == 0)
+		return (SUCCESS);
+	if (ft_strcmp(cmd, "exit") == 0)
 		return (SUCCESS);
 	return (ERROR);
 }

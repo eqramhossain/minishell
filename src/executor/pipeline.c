@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:28:58 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/24 18:37:34 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/24 23:48:11 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,37 @@ static void	execute_pipeline_child(t_ms_data *ms_data, t_cmd *cmd,
 	ft_setup_child_signals();
 	setup_pipe_redirection(prev_pipe, curr_pipe, is_last);
 	if (ft_apply_redirections(cmd->redir) == ERROR)
+	{
+		ft_free_ms_data(ms_data);
 		exit(1);
+	}
 	if (ft_is_builtin(cmd->argv[0]) == SUCCESS)
-		exit(ft_execute_builtin(ms_data, cmd->argv));
+	{
+		ms_data->exit_status = ft_execute_builtin(ms_data, cmd->argv);
+		ft_free_ms_data(ms_data);
+		exit(ms_data->exit_status);
+	}
 	path = ft_find_command_path(cmd->argv[0], ms_data->envp);
 	if (!path)
 	{
 		ft_putstr_fd("minishell: ", STDERR);
 		ft_putstr_fd(cmd->argv[0], STDERR);
 		ft_putendl_fd(": command not found", STDERR);
+		ft_free_ms_data(ms_data);
 		exit(127);
 	}
 	env_array = ft_envp_to_array(ms_data->envp);
 	if (!env_array)
+	{
 		free(path);
+		ft_free_ms_data(ms_data);
+		exit(1);
+	}
 	execve(path, cmd->argv, env_array);
 	ft_putstr_fd("minishell: cannot execute: ", STDERR);
 	ft_putendl_fd(cmd->argv[0], STDERR);
+	free(path);
+	ft_free_array(env_array);
 	ft_free_ms_data(ms_data);
 	exit(126);
 }

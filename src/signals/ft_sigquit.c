@@ -6,10 +6,11 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:26:07 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/22 14:42:48 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 12:32:34 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "signals.h"
 
 void	ft_sigquit(void)

@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:39:55 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:39:57 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 11:43:00 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ static int	st_line_check(t_syntax *synt)
 	return (ft_check_error_syntax(&synt));
 }
 
-/*
-** Main function for syntax error
-** Returns: 0 = valid syntax, 1 = syntax error detected
-*/
 int	ft_ms_syntax_error(const char *input)
 {
 	t_syntax	synt;
