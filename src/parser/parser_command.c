@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:31:54 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:31:57 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:42:18 by ekram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ static int	count_args(t_token *tokens)
 	count = 0;
 	while (tokens && tokens->type != TOKEN_PIPE && tokens->type != TOKEN_EOF)
 	{
-		if (tokens->type == TOKEN_WORD || tokens->type == TOKEN_SINGLE_QUOTE
-			|| tokens->type == TOKEN_DOUBLE_QUOTE)
+		if (ft_is_argument_token(tokens->type))
+		{
 			count++;
+			tokens = tokens->next;
+		}
 		else if (tokens->type == TOKEN_REDIR_IN
 			|| tokens->type == TOKEN_REDIR_OUT || tokens->type == TOKEN_APPEND
 			|| tokens->type == TOKEN_HEREDOC)
@@ -56,16 +58,17 @@ static int	count_args(t_token *tokens)
 				tokens = tokens->next;
 			continue ;
 		}
-		tokens = tokens->next;
+		else
+			tokens = tokens->next;
 	}
 	return (count);
 }
-
 char	**build_argv(t_token **tokens)
 {
 	char	**argv;
 	int		i;
 	int		count;
+	char	*merged;
 
 	count = count_args(*tokens);
 	argv = (char **)malloc(sizeof(char *) * (count + 1));
@@ -75,15 +78,15 @@ char	**build_argv(t_token **tokens)
 	while (*tokens && (*tokens)->type != TOKEN_PIPE
 		&& (*tokens)->type != TOKEN_EOF)
 	{
-		if ((*tokens)->type == TOKEN_WORD
-			|| (*tokens)->type == TOKEN_SINGLE_QUOTE
-			|| (*tokens)->type == TOKEN_DOUBLE_QUOTE)
+		if (ft_is_argument_token((*tokens)->type))
 		{
-			argv[i] = ft_strdup((*tokens)->value);
-			if (!argv[i])
+			merged = ft_merge_adjacent_tokens(tokens);
+			if (!merged)
+			{
+				ft_free_array(argv);
 				return (NULL);
-			i++;
-			*tokens = (*tokens)->next;
+			}
+			argv[i++] = merged;
 		}
 		else if ((*tokens)->type == TOKEN_REDIR_IN
 			|| (*tokens)->type == TOKEN_REDIR_OUT
@@ -101,7 +104,6 @@ char	**build_argv(t_token **tokens)
 	argv[i] = NULL;
 	return (argv);
 }
-
 t_cmd	*ft_parse_command(t_token **tokens)
 {
 	t_cmd	*cmd;

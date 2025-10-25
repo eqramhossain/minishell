@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:30:04 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 12:37:03 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 14:32:16 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void	ft_main_loop(t_ms_data *data)
 				if (data->parser != NULL)
 				{
 					ft_expand_variables(data);
+					ft_process_quotes_full(data->parser->cmds);
 					data->exit_status = ft_executor(data);
 					ft_free_cmd(data->parser->cmds);
 					data->parser->cmds = NULL;

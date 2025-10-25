@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:30:34 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 12:55:14 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:29:19 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ static void	exit_with_error(char *arg)
 
 int	ft_exit(char **args, t_ms_data *ms_data)
 {
-	int	exit_code;
-	int	arg_count;
+	int			exit_code;
+	int			arg_count;
+	long long	temp;
 
 	ft_putendl_fd("exit", STDOUT);
 	arg_count = count_args(args);
@@ -66,7 +67,8 @@ int	ft_exit(char **args, t_ms_data *ms_data)
 		ft_putendl_fd("minishell: exit: too many arguments", STDERR);
 		return (ERROR);
 	}
-	exit_code = ft_atoi(args[1]);
-	exit((unsigned char)exit_code);
+	temp = ft_atoi(args[1]);
+	exit_code = (unsigned char)temp;
+	exit(exit_code);
 	return (SUCCESS);
 }

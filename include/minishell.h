@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 23:05:56 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 12:13:52 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 14:18:35 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "environment.h"
 # include "executor.h"
 # include "parser.h"
+# include "quote.h"
 # include "signals.h"
 # include "structures_def.h"
 # include "syntax.h"

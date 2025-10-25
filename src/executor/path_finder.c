@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:32:38 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/23 11:32:40 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:26:57 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,12 @@ char	*ft_find_command_path(char *command, t_envp *env)
 		return (NULL);
 	if (ft_strchr(command, '/'))
 	{
-		if (access(command, X_OK) == 0)
+		if (access(command, F_OK) == 0)
+		{
+			if (access(command, X_OK) == 0)
+				return (ft_strdup(command));
 			return (ft_strdup(command));
+		}
 		return (NULL);
 	}
 	path_env = get_path_from_env(env);

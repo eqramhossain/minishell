@@ -6,7 +6,7 @@
 #    By: ekram <ekram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 09:31:00 by ehossain          #+#    #+#              #
-#    Updated: 2025/10/24 22:28:39 by ehossain         ###   ########.fr        #
+#    Updated: 2025/10/25 15:33:26 by ehossain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRC_TOKENS =./src/tokenizer/ft_handle_operator.c \
 
 SRC_PARSER = ./src/parser/parser.c \
 			 ./src/parser/parser_command.c \
-			 ./src/parser/parse_redirection.c
+			 ./src/parser/parse_redirection.c \
+			 ./src/parser/utils.c 
 
 SRC_ENVIRONMENT = ./src/environment/get_environment.c \
 				  ./src/environment/ft_free_t_envp.c \
@@ -51,13 +52,19 @@ SRC_BUILTINS = ./src/builtins/pwd_builtin.c \
 			   ./src/builtins/unset_builtin.c \
 			   ./src/builtins/exit_builtin.c 
 
-SRC_EXECUTOR = src/executor/executor.c \
-			   src/executor/executor_builtins.c \
-			   src/executor/single_command.c \
-			   src/executor/external_command.c \
-			   src/executor/pipeline.c \
-			   src/executor/redirections.c \
-			   src/executor/path_finder.c \
+SRC_EXECUTOR = ./src/executor/executor.c \
+			   ./src/executor/executor_builtins.c \
+			   ./src/executor/single_command.c \
+			   ./src/executor/external_command.c \
+			   ./src/executor/pipeline.c \
+			   ./src/executor/redirections.c \
+			   ./src/executor/path_finder.c \
+
+SRC_QUOTE = ./src/quote/process_quote.c \
+			./src/quote/quote.c \
+			./src/quote/quote_check.c \
+			./src/quote/quote_utils.c \
+			./src/quote/filter_empty.c 
 
 SRC_UTILS = ./src/utils/ft_prompt.c \
 			./src/utils/ft_free.c \
@@ -76,6 +83,7 @@ ALL_SRC = $(SRC_MAIN) \
 		  $(SRC_EXPANSION) \
 		  $(SRC_BUILTINS) \
 		  $(SRC_EXECUTOR) \
+		  $(SRC_QUOTE) \
 		  $(SRC_UTILS) \
 
 NAME = minishell

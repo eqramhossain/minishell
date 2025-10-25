@@ -6,11 +6,12 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:43:56 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/24 22:43:57 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:25:10 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
+#include "quote.h"
 
 static void	ft_expand_cmd_args(t_cmd *cmd, t_envp *env, int exit_status);
 static void	ft_expand_redirections(t_cmd *cmd, t_envp *env, int exit_status);
@@ -33,6 +34,7 @@ static void	ft_expand_cmd_args(t_cmd *cmd, t_envp *env, int exit_status)
 	int		i;
 	char	*expanded;
 	char	*old;
+	char	**filtered;
 
 	if (!cmd || !cmd->argv)
 		return ;
@@ -48,8 +50,13 @@ static void	ft_expand_cmd_args(t_cmd *cmd, t_envp *env, int exit_status)
 		}
 		i++;
 	}
+	filtered = ft_filter_empty_args(cmd->argv);
+	if (filtered)
+	{
+		ft_free_array(cmd->argv);
+		cmd->argv = filtered;
+	}
 }
-
 static void	ft_expand_redirections(t_cmd *cmd, t_envp *env, int exit_status)
 {
 	t_redir	*current_redir;

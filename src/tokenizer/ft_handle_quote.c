@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_quote.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:27:30 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/20 20:29:38 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:04:41 by ekram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,20 @@ static char	*ft_extract_quoted_string(t_tokenizer *tokenizer, char quote,
 	char	*str;
 	size_t	i;
 
-	str = (char *)malloc(sizeof(char) * (len + 1));
+	str = (char *)malloc(sizeof(char) * (len + 3));
 	if (!str)
 		return (NULL);
+	str[0] = quote;
+	i = 1;
 	ft_advance_tokenizer(tokenizer);
-	i = 0;
-	while (i < len && tokenizer->curr_char != quote)
+	while (i <= len && tokenizer->curr_char != quote)
 	{
 		str[i] = tokenizer->curr_char;
 		ft_advance_tokenizer(tokenizer);
 		i++;
 	}
-	str[len] = '\0';
+	str[i] = quote;
+	str[i + 1] = '\0';
 	if (tokenizer->curr_char == quote)
 		ft_advance_tokenizer(tokenizer);
 	return (str);

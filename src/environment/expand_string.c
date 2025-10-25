@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   expand_string.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekram <ekram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:43:46 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/25 00:13:35 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:01:52 by ekram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
+#include "tokenizer.h"
 
 static char	*ft_get_variable_value(char *str, int *i, t_envp *env,
 				int exit_status);
 static char	*ft_append_to_result(char *result, char *to_add);
+static int	ft_should_expand(char *str, int pos);
 
 char	*ft_expand_string(char *str, t_envp *env, int exit_status)
 {
@@ -31,7 +33,8 @@ char	*ft_expand_string(char *str, t_envp *env, int exit_status)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && (str[i + 1] == '?' || ft_is_var_char(str[i + 1])))
+		if (str[i] == '$' && (str[i + 1] == '?' || ft_is_var_char(str[i + 1]))
+			&& ft_should_expand(str, i))
 		{
 			i++;
 			value = ft_get_variable_value(str, &i, env, exit_status);
@@ -100,4 +103,24 @@ static char	*ft_append_to_result(char *result, char *to_add)
 		return (result);
 	new_result = ft_strjoin(result, to_add);
 	return (new_result);
+}
+
+static int	ft_should_expand(char *str, int pos)
+{
+	int		i;
+	char	quote;
+
+	i = 0;
+	quote = 0;
+	while (i < pos && str[i])
+	{
+		if (!quote && ft_is_quote(str[i]))
+			quote = str[i];
+		else if (quote && str[i] == quote)
+			quote = 0;
+		i++;
+	}
+	if (quote == '\'')
+		return (0);
+	return (1);
 }

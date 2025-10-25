@@ -6,44 +6,73 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:03:44 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/24 22:06:01 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 14:57:55 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "quote.h"
 
-char	*remove_quotes(const char *str)
+char	*ft_remove_quotes(char *str)
 {
 	char	*result;
 	int		i;
-	char	quote;
 	int		j;
+	char	in_quote;
 
+	if (!str)
+		return (NULL);
+	result = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!result)
+		return (NULL);
 	i = 0;
 	j = 0;
-	quote = 0;
-	result = malloc(strlen(str) + 1);
+	in_quote = 0;
 	while (str[i])
 	{
-		if (!quote && (str[i] == '\'' || str[i] == '"'))
-			quote = str[i]; // open quote
-		else if (quote && str[i] == quote)
-			quote = 0; // close quote
-		else
-			result[j++] = str[i]; // normal character
+		if (!in_quote && (str[i] == '\'' || str[i] == '"'))
+		{
+			in_quote = str[i]; // Open a quote context
+			i++;
+			continue ; // Skip the opening quote character
+		}
+		else if (in_quote && str[i] == in_quote)
+		{
+			in_quote = 0; // Close the quote context
+			i++;
+			continue ; // Skip the closing quote character
+		}
+		// Copy everything else (including quotes that are inside other quotes)
+		result[j++] = str[i];
 		i++;
 	}
 	result[j] = '\0';
 	return (result);
 }
-
-int	main(int ac, char **av)
+char	**ft_remove_quotes_array(char **arr)
 {
-	char	*str;
+	char	**result;
+	int		i;
+	int		count;
 
-	(void)ac;
-	str = remove_quotes(av[1]);
-	printf("str = %s\n", str);
+	if (!arr)
+		return (NULL);
+	count = 0;
+	while (arr[count])
+		count++;
+	result = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!result)
+		return (NULL);
+	i = 0;
+	while (i < count)
+	{
+		result[i] = ft_remove_quotes(arr[i]);
+		if (!result[i])
+		{
+			ft_free_array(result);
+			return (NULL);
+		}
+		i++;
+	}
+	result[i] = NULL;
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: ehossain <ehossain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:29:09 by ehossain          #+#    #+#             */
-/*   Updated: 2025/10/24 18:32:39 by ehossain         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:27:59 by ehossain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	ft_child_execute(t_ms_data *ms_data, t_cmd *cmd)
 {
 	char	*path;
 	char	**env_array;
+	int		exit_code;
 
 	ft_setup_child_signals();
 	if (ft_apply_redirections(cmd->redir) == ERROR)
@@ -26,21 +27,42 @@ static void	ft_child_execute(t_ms_data *ms_data, t_cmd *cmd)
 	{
 		ft_putstr_fd("minishell: ", STDERR);
 		ft_putstr_fd(cmd->argv[0], STDERR);
-		ft_putendl_fd(": command not found", STDERR);
+		if (ft_strchr(cmd->argv[0], '/') && access(cmd->argv[0], F_OK) != 0)
+			ft_putendl_fd(": No such file or directory", STDERR);
+		else
+			ft_putendl_fd(": command not found", STDERR);
 		ft_free_ms_data(ms_data);
 		exit(127);
+	}
+	if (access(path, X_OK) != 0)
+	{
+		ft_putstr_fd("minishell: ", STDERR);
+		ft_putstr_fd(cmd->argv[0], STDERR);
+		ft_putendl_fd(": Permission denied", STDERR);
+		free(path);
+		ft_free_ms_data(ms_data);
+		exit(126);
 	}
 	env_array = ft_envp_to_array(ms_data->envp);
 	if (!env_array)
 		exit(1);
 	execve(path, cmd->argv, env_array);
-	ft_putstr_fd("minishell: ", STDERR);
-	ft_putstr_fd(cmd->argv[0], STDERR);
-	ft_putendl_fd(": cannot execute", STDERR);
+	exit_code = 126;
+	if (access(path, F_OK) == 0 && access(path, X_OK) != 0)
+		exit_code = 126;
+	else if (opendir(path) != NULL)
+	{
+		ft_putstr_fd("minishell: ", STDERR);
+		ft_putstr_fd(cmd->argv[0], STDERR);
+		ft_putendl_fd(": Is a directory", STDERR);
+		exit_code = 126;
+	}
+	else
+		exit_code = 127;
 	free(path);
 	ft_free_array(env_array);
 	ft_free_ms_data(ms_data);
-	exit(126);
+	exit(exit_code);
 }
 
 int	ft_execute_external_single(t_ms_data *ms_data, t_cmd *cmd)
